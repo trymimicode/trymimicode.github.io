@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mimicode — Documentation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0b;
+      --surface: #111113;
+      --surface2: #16161a;
+      --border: #1e1e22;
+      --border-hover: #2a2a30;
+      --text: #e8e8ed;
+      --muted: #909099;
+      --subtle: #5a5a6a;
+      --dim: #2e2e3a;
+      --accent: #818cf8;
+      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+      background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Nav ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    header.scrolled {
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--border);
+    }
+
+    nav {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-logo:hover { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── Layout ── */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+
+    .sidebar-section {
+      margin-bottom: 40px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .sidebar-nav a {
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar-nav a:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-left-color: var(--accent);
+      padding-left: 14px;
+    }
+
+    .sidebar-nav a.active {
+      background: rgba(255,255,255,0.08);
+      color: var(--accent);
+      border-left-color: var(--accent);
+      padding-left: 14px;
+      font-weight: 500;
+    }
+
+    /* ── Content ── */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .doc-section {
+      scroll-margin-top: 100px;
+    }
+
+    .doc-section:first-child {
+      margin-top: -20px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+      margin-top: 28px;
+    }
+
+    h3:first-child { margin-top: 0; }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--text); font-weight: 500; }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    /* ── Code ── */
+    code {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    pre {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+    }
+
+    /* ── Lists ── */
+    ul, ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    li strong { color: var(--text); }
+
+    /* ── Info boxes ── */
+    .info-box {
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .info-box strong { color: var(--accent); }
+
+    .warning-box {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .warning-box strong { color: #ef4444; }
+
+    /* ── Table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    td code {
+      font-size: 12px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      aside {
+        position: static;
+        max-height: none;
+        margin-bottom: -40px;
+      }
+
+      h1 { font-size: 36px; }
+      h2 { font-size: 24px; }
+    }
+
+    @media (max-width: 640px) {
+      main { padding: 40px 16px; gap: 24px; }
+      .sidebar-section { margin-bottom: 24px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 20px; }
+      h3 { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <ul class="nav-links">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs.html" class="active">docs</a></li>
+        <li><a href="https://github.com/alvinliju/mimicode" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <aside>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Getting Started</div>
+        <ul class="sidebar-nav">
+          <li><a href="#install" class="sidebar-link">Installation</a></li>
+          <li><a href="#quickstart" class="sidebar-link">Quick Start</a></li>
+          <li><a href="#setup" class="sidebar-link">Setup</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Usage</div>
+        <ul class="sidebar-nav">
+          <li><a href="#cli" class="sidebar-link">CLI Commands</a></li>
+          <li><a href="#modes" class="sidebar-link">Modes</a></li>
+          <li><a href="#sessions" class="sidebar-link">Sessions</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Research & Design</div>
+        <ul class="sidebar-nav">
+          <li><a href="#philosophy" class="sidebar-link">Philosophy</a></li>
+          <li><a href="#architecture" class="sidebar-link">Architecture</a></li>
+          <li><a href="#tools" class="sidebar-link">Core Tools</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Reference</div>
+        <ul class="sidebar-nav">
+          <li><a href="#api" class="sidebar-link">API & Providers</a></li>
+          <li><a href="#faq" class="sidebar-link">FAQ</a></li>
+          <li><a href="#troubleshooting" class="sidebar-link">Troubleshooting</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="content">
+
+      <!-- Getting Started -->
+      <section class="doc-section" id="install">
+        <h2>Installation</h2>
+        <p>mimicode works on macOS, Linux, and Windows. Choose your platform:</p>
+
+        <h3>macOS / Linux</h3>
+        <pre><code>curl -fsSL https://trymimicode.github.io/install.sh | bash</code></pre>
+        <p>The installer will:</p>
+        <ul>
+          <li>Check for Python 3 and pip</li>
+          <li>Install ripgrep (if needed)</li>
+          <li>Clone the repository to <code>~/.local/mimicode</code></li>
+          <li>Create a Python virtual environment</li>
+          <li>Install dependencies</li>
+          <li>Add mimicode to your PATH</li>
+        </ul>
+
+        <h3>Windows</h3>
+        <pre><code>irm https://trymimicode.github.io/install.ps1 | iex</code></pre>
+        <p>The PowerShell installer will:</p>
+        <ul>
+          <li>Check Python 3 installation</li>
+          <li>Auto-install ripgrep (via scoop, choco, or direct download)</li>
+          <li>Clone to <code>%LOCALAPPDATA%\mimicode</code></li>
+          <li>Setup virtual environment</li>
+          <li>Install Python dependencies</li>
+          <li>Create command wrapper and add to PATH</li>
+        </ul>
+
+        <h3>Manual Installation</h3>
+        <pre><code>git clone https://github.com/alvinliju/mimicode
+cd mimicode
+python3 -m venv venv
+source venv/bin/activate  # or: venv\Scripts\activate on Windows
+pip install -r requirements.txt
+python3 check_deps.py</code></pre>
+
+        <div class="info-box">
+          <strong>Requires:</strong> Python 3.9+, pip, and ripgrep (rg)
+        </div>
+      </section>
+
+      <!-- Quick Start -->
+      <section class="doc-section" id="quickstart">
+        <h2>Quick Start</h2>
+
+        <h3>1. Set Your API Key</h3>
+        <pre><code>export ANTHROPIC_API_KEY="sk-ant-..."</code></pre>
+        <p>On Windows, use:</p>
+        <pre><code>$env:ANTHROPIC_API_KEY = "sk-ant-..."</code></pre>
+
+        <h3>2. Run mimicode</h3>
+        <pre><code>mimicode</code></pre>
+        <p>This starts an interactive REPL session where you can give it tasks.</p>
+
+        <h3>3. Give It a Task</h3>
+        <pre><code>&gt;&gt; read src/main.py and explain what it does</code></pre>
+        <p>mimicode will use its tools to complete the task and report back.</p>
+
+        <div class="info-box">
+          <strong>Tip:</strong> Your conversations are saved to <code>sessions/</code> and can be resumed later.
+        </div>
+      </section>
+
+      <!-- Setup -->
+      <section class="doc-section" id="setup">
+        <h2>Setup & Configuration</h2>
+
+        <h3>Environment Variables</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ANTHROPIC_API_KEY</code></td>
+              <td>Your Anthropic API key (required)</td>
+              <td><code>sk-ant-...</code></td>
+            </tr>
+            <tr>
+              <td><code>MIMICODE_DIR</code></td>
+              <td>Sessions and cache location</td>
+              <td><code>~/.mimicode</code></td>
+            </tr>
+            <tr>
+              <td><code>DEBUG</code></td>
+              <td>Enable debug output</td>
+              <td><code>1</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Verify Installation</h3>
+        <pre><code>python3 check_deps.py</code></pre>
+        <p>This checks that all required dependencies are installed and accessible.</p>
+      </section>
+
+      <!-- CLI Commands -->
+      <section class="doc-section" id="cli">
+        <h2>CLI Commands</h2>
+
+        <h3>Interactive Mode (REPL)</h3>
+        <pre><code>mimicode</code></pre>
+        <p>Start an interactive session. Type your task or question at the prompt.</p>
+
+        <h3>Single Command</h3>
+        <pre><code>mimicode "read src/main.py and explain"</code></pre>
+        <p>Execute a single task and exit. Perfect for scripts and automation.</p>
+
+        <h3>Named Session</h3>
+        <pre><code>mimicode -s myproject "add error handling to auth.py"</code></pre>
+        <p>Create or resume a named session. Sessions persist across runs.</p>
+
+        <h3>Resume Session</h3>
+        <pre><code>mimicode -s myproject</code></pre>
+        <p>Continue a previous session in REPL mode.</p>
+
+        <h3>TUI Mode</h3>
+        <pre><code>mimicode --tui</code></pre>
+        <p>Full-featured terminal UI with rich formatting and navigation.</p>
+
+        <h3>List Sessions</h3>
+        <pre><code>mimicode --list-sessions</code></pre>
+        <p>Show all saved sessions.</p>
+
+        <h3>Get Help</h3>
+        <pre><code>mimicode --help</code></pre>
+        <p>Display all available options.</p>
+      </section>
+
+      <!-- Modes -->
+      <section class="doc-section" id="modes">
+        <h2>Usage Modes</h2>
+
+        <h3>REPL Mode</h3>
+        <p>Interactive prompt where you can refine tasks step-by-step:</p>
+        <pre><code>> read src/app.py
+> now add a function to handle errors
+> create a test file for that
+> done</code></pre>
+
+        <h3>One-Shot Mode</h3>
+        <p>Execute a single task with complete output:</p>
+        <pre><code>mimicode "fix the TypeError in line 42 of utils.py"</code></pre>
+
+        <h3>TUI Mode</h3>
+        <p>Full terminal UI with syntax highlighting, session history, and navigation.</p>
+
+        <h3>Piped Input</h3>
+        <p>Chain mimicode with other commands:</p>
+        <pre><code>echo "read README.md" | mimicode</code></pre>
+      </section>
+
+      <!-- Sessions -->
+      <section class="doc-section" id="sessions">
+        <h2>Session Management</h2>
+
+        <p>Sessions automatically save your conversation, allowing you to resume work later.</p>
+
+        <h3>Session Files</h3>
+        <p>Sessions are stored in the <code>sessions/</code> directory:</p>
+        <ul>
+          <li><code>sessions/&lt;id&gt;.jsonl</code> — Event stream (metadata)</li>
+          <li><code>sessions/&lt;id&gt;.messages.json</code> — Full conversation</li>
+        </ul>
+
+        <h3>Create a Named Session</h3>
+        <pre><code>mimicode -s auth-refactor</code></pre>
+
+        <h3>Resume a Session</h3>
+        <pre><code>mimicode -s auth-refactor</code></pre>
+
+        <h3>List All Sessions</h3>
+        <pre><code>mimicode --list-sessions</code></pre>
+
+        <h3>Delete a Session</h3>
+        <pre><code>rm sessions/auth-refactor.*</code></pre>
+      </section>
+
+      <!-- Philosophy -->
+      <section class="doc-section" id="philosophy">
+        <h2>Philosophy: Deliberate Over Broad</h2>
+
+        <p>mimicode is built on the principle that <strong>less context is better</strong>. Instead of loading your entire codebase and asking the model to figure out what matters, mimicode:</p>
+
+        <ul>
+          <li><strong>Requires ripgrep</strong> — Fast, focused searches that respect <code>.gitignore</code></li>
+          <li><strong>Reads before editing</strong> — Understands context before making changes</li>
+          <li><strong>Scopes narrowly</strong> — Operates on specific files, not entire directories</li>
+          <li><strong>Bans broad operations</strong> — No <code>find</code>, no <code>grep -r</code>, no <code>ls -R</code></li>
+          <li><strong>Caps tool output</strong> — 100KB limit forces focused, efficient searches</li>
+        </ul>
+
+        <p>This approach reduces token waste, speeds up execution, and keeps costs low.</p>
+      </section>
+
+      <!-- Architecture -->
+      <section class="doc-section" id="architecture">
+        <h2>Architecture</h2>
+
+        <h3>Core Components</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>agent.py</code></td>
+              <td>Main loop, CLI entry point, task orchestration</td>
+            </tr>
+            <tr>
+              <td><code>tools.py</code></td>
+              <td>Tool implementations with safety checks</td>
+            </tr>
+            <tr>
+              <td><code>providers.py</code></td>
+              <td>Claude API wrapper with prompt caching</td>
+            </tr>
+            <tr>
+              <td><code>tools_session.py</code></td>
+              <td>Session-aware tool wrappers</td>
+            </tr>
+            <tr>
+              <td><code>logger.py</code></td>
+              <td>JSONL session logging and event tracking</td>
+            </tr>
+            <tr>
+              <td><code>mimi_memory.py</code></td>
+              <td>Memory and embedding-based retrieval</td>
+            </tr>
+            <tr>
+              <td><code>tui.py</code></td>
+              <td>Terminal UI (Textual framework)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Data Flow</h3>
+        <pre><code>User Input
+    ↓
+CLI Parser (agent.py)
+    ↓
+Session Manager (tools_session.py)
+    ↓
+Tool Executor (tools.py)
+    ↓
+Claude API (providers.py)
+    ↓
+Logger (logger.py)
+    ↓
+User Output</code></pre>
+      </section>
+
+      <!-- Tools -->
+      <section class="doc-section" id="tools">
+        <h2>Core Tools</h2>
+
+        <p>mimicode provides four focused tools:</p>
+
+        <h3>1. Read</h3>
+        <p>Read file contents with smart truncation. Output capped at 100KB.</p>
+        <pre><code>read src/app.py
+read src/app.py --lines 1-50</code></pre>
+
+        <h3>2. Write</h3>
+        <p>Create or overwrite files. Requires reading first to verify intent.</p>
+        <pre><code>write path/to/file.py "file contents"</code></pre>
+
+        <h3>3. Edit</h3>
+        <p>Make targeted edits to existing files with precise line ranges.</p>
+        <pre><code>edit src/app.py 42:50 "new code here"</code></pre>
+
+        <h3>4. Bash</h3>
+        <p>Execute shell commands with safety guardrails. Blocks dangerous operations like <code>rm -rf /</code>.</p>
+        <pre><code>bash "npm test"
+bash "python -m pytest"</code></pre>
+
+        <div class="warning-box">
+          <strong>Safety:</strong> Certain commands are blocked: <code>rm -rf</code>, <code>curl | sh</code>, <code>grep -r</code>, <code>find</code>, <code>cat /etc/passwd</code>, etc.
+        </div>
+      </section>
+
+      <!-- API & Providers -->
+      <section class="doc-section" id="api">
+        <h2>API & Providers</h2>
+
+        <h3>Anthropic API</h3>
+        <p>mimicode uses the Anthropic API with Claude models. Set your API key:</p>
+        <pre><code>export ANTHROPIC_API_KEY="sk-ant-..."</code></pre>
+
+        <h3>Prompt Caching</h3>
+        <p>Automatic prompt caching reduces API costs by reusing cached context across requests. No configuration needed.</p>
+
+        <h3>Supported Models</h3>
+        <ul>
+          <li><code>claude-opus-4-1</code> — Most capable, higher cost</li>
+          <li><code>claude-sonnet-4-1</code> — Balanced performance and cost</li>
+          <li><code>claude-haiku-3-5</code> — Fast and cheap</li>
+        </ul>
+
+        <p>Set the model by editing <code>providers.py</code> or via environment variable:</p>
+        <pre><code>export ANTHROPIC_MODEL="claude-sonnet-4-1"</code></pre>
+      </section>
+
+      <!-- FAQ -->
+      <section class="doc-section" id="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>Q: What's the difference from other coding agents?</h3>
+        <p><strong>A:</strong> mimicode is built for efficiency. It uses 75% less context, costs 75% less to run, and completes tasks faster by being deliberate about what it reads and how it operates.</p>
+
+        <h3>Q: Can I use this for production code?</h3>
+        <p><strong>A:</strong> Yes. mimicode respects your code review process — it suggests changes you review before committing. Always test thoroughly.</p>
+
+        <h3>Q: Is my code sent to Anthropic?</h3>
+        <p><strong>A:</strong> Yes, code is sent to Anthropic's API for processing. Use only with code you're comfortable sharing. Don't include secrets or sensitive data.</p>
+
+        <h3>Q: How do I update mimicode?</h3>
+        <p><strong>A:</strong> On macOS/Linux: <code>cd ~/.local/mimicode && git pull</code>. On Windows: Manual update in <code>%LOCALAPPDATA%\mimicode</code>.</p>
+
+        <h3>Q: Can I use a different AI provider?</h3>
+        <p><strong>A:</strong> Currently only Anthropic is supported. OpenAI support is planned.</p>
+
+        <h3>Q: How do I contribute?</h3>
+        <p><strong>A:</strong> Submit issues and PRs to the <a href="https://github.com/alvinliju/mimicode">GitHub repository</a>.</p>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="doc-section" id="troubleshooting">
+        <h2>Troubleshooting</h2>
+
+        <h3>Installation Failed: "ripgrep not found"</h3>
+        <p>Install ripgrep manually:</p>
+        <pre><code># macOS
+brew install ripgrep
+
+# Ubuntu/Debian
+sudo apt install ripgrep
+
+# Fedora
+sudo dnf install ripgrep
+
+# Windows (Chocolatey)
+choco install ripgrep
+
+# Windows (Scoop)
+scoop install ripgrep</code></pre>
+
+        <h3>"ANTHROPIC_API_KEY not set"</h3>
+        <p>Set your API key:</p>
+        <pre><code>export ANTHROPIC_API_KEY="your-key-here"</code></pre>
+        <p>Or on Windows:</p>
+        <pre><code>$env:ANTHROPIC_API_KEY = "your-key-here"</code></pre>
+
+        <h3>"ModuleNotFoundError: No module named 'anthropic'"</h3>
+        <p>Reinstall dependencies:</p>
+        <pre><code>pip install --upgrade -r requirements.txt</code></pre>
+
+        <h3>"Command 'mimicode' not found"</h3>
+        <p>The PATH may not be updated. On Linux/macOS:</p>
+        <pre><code>source ~/.bashrc  # or ~/.zshrc</code></pre>
+        <p>Or add manually:</p>
+        <pre><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
+
+        <h3>"rg: command not found" (during operation)</h3>
+        <p>ripgrep is required. Install it using the steps above.</p>
+
+        <h3>Sessions not saving</h3>
+        <p>Ensure the <code>sessions/</code> directory exists and is writable:</p>
+        <pre><code>mkdir -p ~/mimicode/sessions
+chmod 755 ~/mimicode/sessions</code></pre>
+
+        <div class="info-box">
+          <strong>Still stuck?</strong> Open an issue on <a href="https://github.com/alvinliju/mimicode/issues">GitHub</a>.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // ── Sidebar active link ──
+    const links = document.querySelectorAll('.sidebar-link');
+    const sections = document.querySelectorAll('.doc-section');
+
+    function updateActiveLink() {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+
+    // ── Sticky nav ──
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+
+</body>
+</html>
