@@ -49,8 +49,27 @@ detect_os() {
         fi
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         OS="macos"
+    elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "win32" ]]; then
+        fail "This script is for macOS and Linux.
+
+If you're on Windows, please use the PowerShell installer instead:
+
+  irm https://trymimicode.github.io/install.ps1 | iex
+
+Or if you prefer Git Bash, install manually:
+  1. Download Python from https://www.python.org/downloads (add to PATH)
+  2. pip install -r requirements.txt
+  3. choco install ripgrep (or scoop install ripgrep)
+  4. python agent.py --tui
+"
     else
-        fail "Unsupported OS: $OSTYPE"
+        fail "Unsupported OS: $OSTYPE
+
+This installer supports:
+  • macOS (via bash)
+  • Linux (via bash)
+  • Windows (use: irm https://trymimicode.github.io/install.ps1 | iex)
+"
     fi
 }
 

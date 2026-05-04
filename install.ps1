@@ -225,11 +225,19 @@ function Setup-PythonEnv {
 
     # Activate venv and install dependencies
     Write-Info "Installing Python dependencies..."
-    & "$VENV_DIR\Scripts\pip.exe" install --upgrade pip setuptools wheel *>$null
-    & "$VENV_DIR\Scripts\pip.exe" install -r requirements.txt *>$null
+
+    $PythonExe = "$VENV_DIR\Scripts\python.exe"
+
+    # Upgrade pip, suppress warnings
+    Write-Info "Upgrading pip..."
+    Invoke-Expression "& '$PythonExe' -m pip install --upgrade pip setuptools wheel --quiet" -ErrorAction SilentlyContinue
+
+    # Install requirements
+    Write-Info "Installing packages from requirements.txt..."
+    $Output = & $PythonExe -m pip install -r requirements.txt --quiet
 
     if ($LASTEXITCODE -ne 0) {
-        Exit-WithError "Failed to install Python dependencies"
+        Exit-WithError "Failed to install Python dependencies`n$Output"
     }
 
     Write-Success "Python dependencies installed"
