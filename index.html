@@ -619,20 +619,20 @@
     <div class="stats-meta">statistics <span class="demo-tag">(demo)</span></div>
     <div class="stats-strip">
       <div class="stat-cell">
-        <div class="stat-number">75%</div>
-        <div class="stat-label">less context consumed<br>per task</div>
+        <div class="stat-number">85.7%</div>
+        <div class="stat-label">pass rate on internal suite<br>(6/7 tasks)</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">4×</div>
-        <div class="stat-label">fewer tokens sent<br>to the model</div>
+        <div class="stat-number">62%</div>
+        <div class="stat-label">less avg input tokens per task<br>vs ~12.4k industry avg</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">$0.18</div>
-        <div class="stat-label">avg cost per session<br>vs $0.74 elsewhere</div>
+        <div class="stat-number">$0.15</div>
+        <div class="stat-label">est. session cost (10-turn)<br>vs $0.42 all-Sonnet</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">&lt;8%</div>
-        <div class="stat-label">context wasted on<br>irrelevant files</div>
+        <div class="stat-number">73%</div>
+        <div class="stat-label">cache hit rate<br>vs 18–25% industry avg</div>
       </div>
     </div>
 
@@ -666,28 +666,28 @@
 
       <div class="compare-row">
         <span class="compare-metric">Avg tokens per task</span>
-        <span class="compare-val bad">~42,000</span>
-        <span class="compare-val good">~10,500</span>
+        <span class="compare-val bad">~12,400</span>
+        <span class="compare-val good">~4,753</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Context window wasted</span>
-        <span class="compare-val bad">61%</span>
-        <span class="compare-val good">&lt;8%</span>
+        <span class="compare-metric">Cache hit rate</span>
+        <span class="compare-val bad">~22%</span>
+        <span class="compare-val good">73%</span>
       </div>
       <div class="compare-row">
         <span class="compare-metric">Avg cost per session</span>
-        <span class="compare-val bad">$0.74</span>
-        <span class="compare-val good">$0.18</span>
+        <span class="compare-val bad">$0.42</span>
+        <span class="compare-val good">$0.15</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Files read per task</span>
-        <span class="compare-val bad">~20</span>
-        <span class="compare-val good">~3</span>
+        <span class="compare-metric">Tool error rate</span>
+        <span class="compare-val bad">8–12%</span>
+        <span class="compare-val good">4.3%</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Unnecessary tool calls</span>
-        <span class="compare-val bad">frequent</span>
-        <span class="compare-val good">rare</span>
+        <span class="compare-metric">Suite pass rate (industry est.)</span>
+        <span class="compare-val bad">~70%</span>
+        <span class="compare-val good">85.7%</span>
       </div>
       <div class="compare-row">
         <span class="compare-metric">Context pruning</span>
@@ -712,7 +712,7 @@
           <div class="bar-track">
             <div class="bar-fill us" id="barUs" style="width:0%"></div>
           </div>
-          <span class="bar-pct">25%</span>
+          <span class="bar-pct">38%</span>
         </div>
       </div>
 
@@ -778,7 +778,7 @@
       entries.forEach(e => {
         if (e.isIntersecting) {
           barThem.style.width = '100%';
-          barUs.style.width   = '25%';
+          barUs.style.width   = '38%';
           io.disconnect();
         }
       });
