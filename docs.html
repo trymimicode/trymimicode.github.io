@@ -4,99 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mimicode | Documentation</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0a0a0b;
-      --surface: #111113;
-      --surface2: #16161a;
-      --border: #1e1e22;
-      --border-hover: #2a2a30;
-      --text: #e8e8ed;
-      --muted: #909099;
-      --subtle: #5a5a6a;
-      --dim: #2e2e3a;
-      --accent: #818cf8;
-      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
-      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-      background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Nav */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.25s, border-color 0.25s;
-    }
-
-    header.scrolled {
-      background: rgba(10, 10, 11, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom-color: var(--border);
-    }
-
-    nav {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-    }
-
-    .nav-logo {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .nav-logo:hover { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a.active { color: var(--accent); }
-
-    /* Layout */
+    /* ── Main layout ── */
     main {
       flex: 1;
       width: 100%;
@@ -108,7 +18,7 @@
       gap: 60px;
     }
 
-    /* Sidebar */
+    /* ── Sidebar ── */
     aside {
       position: sticky;
       top: 100px;
@@ -117,9 +27,7 @@
       overflow-y: auto;
     }
 
-    .sidebar-section {
-      margin-bottom: 40px;
-    }
+    .sidebar-section { margin-bottom: 40px; }
 
     .sidebar-title {
       font-size: 11px;
@@ -147,57 +55,45 @@
       border-left: 2px solid transparent;
     }
 
-    .sidebar-nav a:hover {
-      background: rgba(255,255,255,0.05);
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
       color: var(--text);
-      border-left-color: var(--accent);
       padding-left: 14px;
     }
+
+    .sidebar-nav a:hover { background: rgba(255,255,255,0.05); border-left-color: var(--border-hover); }
 
     .sidebar-nav a.active {
       background: rgba(255,255,255,0.08);
-      color: var(--accent);
-      border-left-color: var(--accent);
-      padding-left: 14px;
+      border-left-color: var(--text);
       font-weight: 500;
     }
 
-    /* Content */
+    /* ── Content ── */
     .content {
       display: flex;
       flex-direction: column;
       gap: 80px;
     }
 
-    .doc-section {
-      scroll-margin-top: 100px;
-    }
+    .doc-section { scroll-margin-top: 100px; }
+    .doc-section:first-child { margin-top: -20px; }
 
-    .doc-section:first-child {
-      margin-top: -20px;
-    }
+    /* ── Typography ── */
+    h1, h2, h3 { color: var(--text); }
 
-    h1 {
-      font-size: 48px;
+    h1, h2 {
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 12px;
-      color: var(--text);
     }
 
-    h2 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
+    h1 { font-size: 48px; margin-bottom: 12px; }
+    h2 { font-size: 32px; margin-bottom: 24px; }
 
     h3 {
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 12px;
-      color: var(--text);
       margin-top: 28px;
     }
 
@@ -214,80 +110,67 @@
     strong { color: var(--text); font-weight: 500; }
 
     a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.15s;
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-underline-offset: 3px;
+      transition: color 0.15s, text-decoration-color 0.15s;
     }
 
-    a:hover { text-decoration: underline; }
+    a:hover { color: var(--text); text-decoration-color: var(--muted); }
 
-    /* Code */
-    code {
+    /* ── Code ── */
+    code, pre {
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2px 6px;
       font-family: var(--font-mono);
       font-size: 13px;
-      color: var(--accent);
+    }
+
+    code {
+      border-radius: 4px;
+      padding: 2px 6px;
+      color: var(--text);
     }
 
     pre {
-      background: var(--surface2);
-      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 16px;
       overflow-x: auto;
       margin-bottom: 16px;
-      font-family: var(--font-mono);
-      font-size: 13px;
       line-height: 1.5;
     }
 
-    pre code {
-      background: none;
-      border: none;
-      padding: 0;
-      color: var(--text);
-    }
+    pre code { background: none; border: none; padding: 0; }
 
-    /* Lists */
-    ul, ol {
-      margin-bottom: 16px;
-      padding-left: 24px;
-    }
+    /* ── Lists ── */
+    ul, ol { margin-bottom: 16px; padding-left: 24px; }
+    li { margin-bottom: 8px; color: var(--muted); }
+    li strong,
+    .info-box strong { color: var(--text); }
 
-    li {
-      margin-bottom: 8px;
-      color: var(--muted);
-    }
-
-    li strong { color: var(--text); }
-
-    /* Info boxes */
-    .info-box {
-      background: rgba(129, 140, 248, 0.08);
-      border: 1px solid rgba(129, 140, 248, 0.2);
+    /* ── Info / Warning boxes ── */
+    .info-box,
+    .warning-box {
       border-radius: 8px;
       padding: 16px;
       margin-bottom: 24px;
       color: var(--text);
     }
 
-    .info-box strong { color: var(--accent); }
+    .info-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-hover);
+    }
 
     .warning-box {
       background: rgba(239, 68, 68, 0.08);
       border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 24px;
-      color: var(--text);
     }
 
     .warning-box strong { color: #ef4444; }
 
-    /* Table */
+    /* ── Table ── */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -295,38 +178,25 @@
       font-size: 13px;
     }
 
-    th {
-      text-align: left;
+    th, td {
       padding: 12px;
       border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      text-align: left;
       background: var(--surface2);
       font-weight: 600;
       color: var(--text);
     }
 
-    td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-    }
+    td { color: var(--muted); }
+    td code { font-size: 12px; }
 
-    td code {
-      font-size: 12px;
-    }
-
-    /* Responsive */
+    /* ── Responsive ── */
     @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      aside {
-        position: static;
-        max-height: none;
-        margin-bottom: -40px;
-      }
-
+      main { grid-template-columns: 1fr; gap: 40px; }
+      aside { position: static; max-height: none; margin-bottom: -40px; }
       h1 { font-size: 36px; }
       h2 { font-size: 24px; }
     }

@@ -5,94 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="assets/templogomimicode.png">
   <title>mimicode</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-
-    :root {
-      --bg: #0a0a0b;
-      --surface: #111113;
-      --surface2: #16161a;
-      --border: #1e1e22;
-      --border-hover: #2a2a30;
-      --text: #e8e8ed;
-      --muted: #909099;
-      --subtle: #5a5a6a;
-      --dim: #2e2e3a;
-      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
-      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-      background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* ── Nav ── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.25s, border-color 0.25s;
-    }
-
-    header.scrolled {
-      background: rgba(10, 10, 11, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom-color: var(--border);
-    }
-
-    nav {
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-    }
-
-    .nav-logo {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
+    body { align-items: center; }
 
     /* ── Main ── */
     main {
@@ -122,9 +37,11 @@
       color: var(--text);
     }
 
+    .tagline,
+    .sub-tagline { color: var(--muted); }
+
     .tagline {
       font-size: clamp(15px, 2.2vw, 19px);
-      color: var(--muted);
       max-width: 520px;
       margin-bottom: 12px;
       line-height: 1.75;
@@ -134,14 +51,13 @@
 
     .sub-tagline {
       font-size: 13px;
-      color: var(--muted);
       max-width: 440px;
       margin-bottom: 44px;
       opacity: 0.65;
       line-height: 1.7;
     }
 
-    /* ── Install widget (desktop) ── */
+    /* ── Install widget ── */
     .install-wrap {
       display: flex;
       flex-direction: column;
@@ -223,8 +139,9 @@
       transition: background 0.1s, color 0.1s;
     }
 
-    .dropdown-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .dropdown-item:hover,
     .dropdown-item.active { color: var(--text); }
+    .dropdown-item:hover { background: rgba(255,255,255,0.04); }
 
     .command-display {
       display: flex;
@@ -265,8 +182,9 @@
       position: relative;
     }
 
-    .copy-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .copy-btn:hover,
     .copy-btn.copied { color: var(--text); }
+    .copy-btn:hover { background: rgba(255,255,255,0.05); }
 
     .tooltip {
       position: absolute;
@@ -312,13 +230,22 @@
       .guide-btn { display: flex; }
     }
 
+    /* ── Eyebrow labels ── */
+    .section-eyebrow,
+    .stats-meta { text-transform: uppercase; color: var(--subtle); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
     .stats-meta {
-      margin-top: 78px;
-      margin-bottom: 10px;
-      color: var(--subtle);
       font-size: 12px;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
+      margin-top: 78px;
+      margin-bottom: 10px;
     }
 
     .hero-image {
@@ -331,18 +258,20 @@
       margin-bottom: 260px;
     }
 
-    /* ── Stats strip ── */
-    .stats-strip {
+    /* ── Grid strips ── */
+    .stats-strip,
+    .mini-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       width: 100%;
-      margin-top: 0;
+      background: var(--border);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      background: var(--border);
     }
+
+    .stats-strip { grid-template-columns: repeat(4, 1fr); }
+    .mini-grid   { grid-template-columns: repeat(3, 1fr); }
 
     .stat-cell {
       background: var(--surface);
@@ -360,35 +289,17 @@
       color: var(--text);
     }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--subtle);
-      line-height: 1.4;
-    }
+    .stat-label { font-size: 12px; color: var(--subtle); line-height: 1.4; }
 
-    .stat-label code {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text);
-    }
+    .stat-label code,
+    .mini-cell code { font-family: var(--font-mono); font-size: 11px; color: var(--text); }
 
-    /* ── Section eyebrow ── */
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--subtle);
-      margin-bottom: 24px;
-    }
+    /* ── Content sections ── */
+    .why-section,
+    .features-section,
+    .compare-section { width: 100%; margin-top: 80px; }
 
-    /* ── Why section ── */
-    .why-section {
-      width: 100%;
-      max-width: 820px;
-      margin-top: 80px;
-      align-self: flex-start;
-    }
+    .why-section { max-width: 820px; align-self: flex-start; }
 
     .why-body {
       font-size: 15px;
@@ -410,26 +321,7 @@
       padding: 1px 5px;
     }
 
-    /* ── Features grid (matches stats strip) ── */
-    .features-section {
-      width: 100%;
-      margin-top: 80px;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .mini-cell {
-      background: var(--surface);
-      padding: 22px 20px;
-    }
+    .mini-cell { background: var(--surface); padding: 22px 20px; }
 
     .mini-cell h3 {
       font-size: 13px;
@@ -439,28 +331,13 @@
       letter-spacing: -0.02em;
     }
 
-    .mini-cell p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .mini-cell code {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text);
-    }
+    .mini-cell p { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
     /* ── Comparison table ── */
-    .compare-section {
-      width: 100%;
-      margin-top: 80px;
-    }
+    .compare-header,
+    .compare-row { display: grid; grid-template-columns: 1fr 160px 160px; }
 
     .compare-header {
-      display: grid;
-      grid-template-columns: 1fr 160px 160px;
-      gap: 0;
       padding: 0 0 14px 0;
       border-bottom: 1px solid var(--border);
     }
@@ -476,9 +353,6 @@
     .compare-header .col-mimi { color: var(--text); }
 
     .compare-row {
-      display: grid;
-      grid-template-columns: 1fr 160px 160px;
-      gap: 0;
       padding: 18px 0;
       border-bottom: 1px solid var(--border);
       align-items: center;
@@ -486,15 +360,11 @@
 
     .compare-row:hover { background: rgba(255,255,255,0.01); }
 
-    .compare-metric {
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .compare-metric,
+    .compare-val { font-size: 13px; }
 
-    .compare-val {
-      font-size: 13px;
-      font-family: var(--font-mono);
-    }
+    .compare-metric { color: var(--muted); }
+    .compare-val    { font-family: var(--font-mono); }
 
     .compare-val.bad  { color: var(--muted); }
     .compare-val.good { color: var(--text);  }
@@ -516,33 +386,20 @@
 
     /* ── Responsive ── */
     @media (max-width: 720px) {
-      .hero-image {
-        transform: scale(1.18);
-        margin-bottom: 110px;
-      }
-
-      .stats-meta {
-        margin-top: 36px;
-      }
-
+      .hero-image { transform: scale(1.18); margin-bottom: 110px; }
+      .stats-meta { margin-top: 36px; }
       .stats-strip { grid-template-columns: repeat(2, 1fr); }
-      .mini-grid { grid-template-columns: repeat(2, 1fr); }
-      .compare-header, .compare-row { grid-template-columns: 1fr 100px 100px; }
+      .mini-grid   { grid-template-columns: repeat(2, 1fr); }
+      .compare-header,
+      .compare-row { grid-template-columns: 1fr 100px 100px; }
     }
 
     @media (max-width: 500px) {
-      .hero-image {
-        transform: scale(1.08);
-        margin-bottom: 36px;
-      }
-
-      .stats-meta {
-        margin-top: 22px;
-      }
-
+      .hero-image { transform: scale(1.08); margin-bottom: 36px; }
+      .stats-meta { margin-top: 22px; }
       .nav-links { display: none; }
       .stats-strip { grid-template-columns: 1fr 1fr; }
-      .mini-grid { grid-template-columns: 1fr; }
+      .mini-grid   { grid-template-columns: 1fr; }
     }
   </style>
 </head>
