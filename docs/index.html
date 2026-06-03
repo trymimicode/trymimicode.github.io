@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mimicode | Documentation</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="../assets/templogomimicode.png">
+  <link rel="stylesheet" href="../style.css">
   <style>
-    /* ── Main layout ── */
+    /* ── Layout ── */
     main {
       flex: 1;
       width: 100%;
@@ -51,8 +52,9 @@
       color: var(--muted);
       text-decoration: none;
       font-size: 13px;
-      transition: all 0.15s;
+      transition: color 0.15s, background 0.15s, padding-left 0.15s, border-left-color 0.15s;
       border-left: 2px solid transparent;
+      display: block;
     }
 
     .sidebar-nav a:hover,
@@ -79,37 +81,37 @@
     .doc-section { scroll-margin-top: 100px; }
     .doc-section:first-child { margin-top: -20px; }
 
-    /* ── Typography ── */
-    h1, h2, h3 { color: var(--text); }
+    /* ── Typography (scoped to .content so nav is unaffected) ── */
+    .content h1,
+    .content h2,
+    .content h3 { color: var(--text); }
 
-    h1, h2 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+    .content h1,
+    .content h2 { font-weight: 700; letter-spacing: -0.02em; }
 
-    h1 { font-size: 48px; margin-bottom: 12px; }
-    h2 { font-size: 32px; margin-bottom: 24px; }
+    .content h1 { font-size: 48px; margin-bottom: 12px; }
+    .content h2 { font-size: 32px; margin-bottom: 24px; }
 
-    h3 {
+    .content h3 {
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 12px;
       margin-top: 28px;
     }
 
-    h3:first-child { margin-top: 0; }
+    .content h3:first-child { margin-top: 0; }
 
-    p {
+    .content p {
       color: var(--muted);
       margin-bottom: 16px;
       line-height: 1.8;
     }
 
-    p:last-child { margin-bottom: 0; }
+    .content p:last-child { margin-bottom: 0; }
 
-    strong { color: var(--text); font-weight: 500; }
+    .content strong { color: var(--text); font-weight: 500; }
 
-    a {
+    .content a {
       color: var(--muted);
       text-decoration: underline;
       text-decoration-color: var(--border-hover);
@@ -117,23 +119,24 @@
       transition: color 0.15s, text-decoration-color 0.15s;
     }
 
-    a:hover { color: var(--text); text-decoration-color: var(--muted); }
+    .content a:hover { color: var(--text); text-decoration-color: var(--muted); }
 
     /* ── Code ── */
-    code, pre {
+    .content code,
+    .content pre {
       background: var(--surface2);
       border: 1px solid var(--border);
       font-family: var(--font-mono);
       font-size: 13px;
     }
 
-    code {
+    .content code {
       border-radius: 4px;
       padding: 2px 6px;
       color: var(--text);
     }
 
-    pre {
+    .content pre {
       border-radius: 8px;
       padding: 16px;
       overflow-x: auto;
@@ -141,15 +144,18 @@
       line-height: 1.5;
     }
 
-    pre code { background: none; border: none; padding: 0; }
+    .content pre code { background: none; border: none; padding: 0; }
 
     /* ── Lists ── */
-    ul, ol { margin-bottom: 16px; padding-left: 24px; }
-    li { margin-bottom: 8px; color: var(--muted); }
-    li strong,
+    .content ul,
+    .content ol { margin-bottom: 16px; padding-left: 24px; }
+
+    .content li { margin-bottom: 8px; color: var(--muted); }
+
+    .content li strong,
     .info-box strong { color: var(--text); }
 
-    /* ── Info / Warning boxes ── */
+    /* ── Callout boxes ── */
     .info-box,
     .warning-box {
       border-radius: 8px;
@@ -178,10 +184,7 @@
       font-size: 13px;
     }
 
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-    }
+    th, td { padding: 12px; border-bottom: 1px solid var(--border); }
 
     th {
       text-align: left;
@@ -197,16 +200,16 @@
     @media (max-width: 900px) {
       main { grid-template-columns: 1fr; gap: 40px; }
       aside { position: static; max-height: none; margin-bottom: -40px; }
-      h1 { font-size: 36px; }
-      h2 { font-size: 24px; }
+      .content h1 { font-size: 36px; }
+      .content h2 { font-size: 24px; }
     }
 
     @media (max-width: 640px) {
       main { padding: 40px 16px; gap: 24px; }
       .sidebar-section { margin-bottom: 24px; }
-      h1 { font-size: 28px; }
-      h2 { font-size: 20px; }
-      h3 { font-size: 16px; }
+      .content h1 { font-size: 28px; }
+      .content h2 { font-size: 20px; }
+      .content h3 { font-size: 16px; }
     }
   </style>
 </head>
@@ -217,7 +220,7 @@
       <a class="nav-logo" href="/">mimicode</a>
       <ul class="nav-links">
         <li><a href="/">home</a></li>
-        <li><a href="/docs.html" class="active">docs</a></li>
+        <li><a href="/docs/" class="active">docs</a></li>
         <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
       </ul>
     </nav>
