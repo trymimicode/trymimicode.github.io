@@ -1,267 +1,138 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+# mimicode installer (macOS & Linux)
+#
+# Downloads a prebuilt mimicode binary (no Go toolchain required) and installs
+# it to ~/.local/bin, then adds that directory to your PATH via the correct
+# profile file for your shell (zsh, bash, or fish).
+#
+# Quick install:
+#   curl -fsSL https://raw.githubusercontent.com/trymimicode/mimicode-go/main/install.sh | bash
+#
+# Overrides:
+#   INSTALL_DIR=$HOME/bin   ...   install location (default: ~/.local/bin)
+#   MIMICODE_BASE_URL=...         release download base (used by CI tests)
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+REPO="trymimicode/mimicode-go"
+BINARY_NAME="mimicode"
+INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
+BASE_URL="${MIMICODE_BASE_URL:-https://github.com/$REPO/releases/latest/download}"
 
-# Configuration
-GITHUB_REPO="https://github.com/alvinliju/mimicode"
-INSTALL_DIR="$HOME/.local/mimicode"
-BIN_DIR="$HOME/.local/bin"
-VENV_DIR="$INSTALL_DIR/venv"
+echo "🚀 Installing mimicode..."
 
-# Helper functions
-print_header() {
-    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${BLUE}  $1${NC}"
-    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-}
+# ── Detect OS / architecture ─────────────────────────────────────────────────
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+case "$OS" in
+    Linux)  OS="linux" ;;
+    Darwin) OS="darwin" ;;
+    *)      echo "❌ Unsupported OS: $OS"; exit 1 ;;
+esac
+case "$ARCH" in
+    x86_64)        ARCH="amd64" ;;
+    aarch64|arm64) ARCH="arm64" ;;
+    *)             echo "❌ Unsupported architecture: $ARCH"; exit 1 ;;
+esac
 
-print_success() {
-    echo -e "${GREEN}✓ $1${NC}"
-}
+# ── Download the prebuilt binary ─────────────────────────────────────────────
+BINARY_FILE="$BINARY_NAME-$OS-$ARCH"
+DOWNLOAD_URL="$BASE_URL/$BINARY_FILE"
+TMP_BIN="$(mktemp)"
+trap 'rm -f "$TMP_BIN"' EXIT
 
-print_error() {
-    echo -e "${RED}✗ $1${NC}"
-}
+echo "  Downloading $BINARY_FILE..."
+if command -v curl >/dev/null 2>&1; then
+    HTTP_CODE="$(curl -fL -w '%{http_code}' -o "$TMP_BIN" "$DOWNLOAD_URL" 2>/dev/null || echo 000)"
+elif command -v wget >/dev/null 2>&1; then
+    if wget -qO "$TMP_BIN" "$DOWNLOAD_URL"; then HTTP_CODE="200"; else HTTP_CODE="000"; fi
+else
+    echo "❌ Need curl or wget to download mimicode."; exit 1
+fi
 
-print_info() {
-    echo -e "${YELLOW}→ $1${NC}"
-}
-
-fail() {
-    print_error "$1"
+if [ "$HTTP_CODE" != "200" ] || [ ! -s "$TMP_BIN" ]; then
+    echo "❌ Could not download a prebuilt binary for $OS/$ARCH (HTTP $HTTP_CODE)."
+    echo "   Check available downloads at https://github.com/$REPO/releases"
     exit 1
-}
+fi
 
-detect_os() {
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        if [ -f /etc/os-release ]; then
-            . /etc/os-release
-            OS=$ID
-        else
-            OS="linux"
-        fi
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        OS="macos"
-    elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "win32" ]]; then
-        fail "This script is for macOS and Linux.
+# ── Install ──────────────────────────────────────────────────────────────────
+mkdir -p "$INSTALL_DIR"
+mv -f "$TMP_BIN" "$INSTALL_DIR/$BINARY_NAME"
+chmod +x "$INSTALL_DIR/$BINARY_NAME"
+trap - EXIT
+echo "✓ $BINARY_NAME installed to $INSTALL_DIR/$BINARY_NAME"
 
-If you're on Windows, please use the PowerShell installer instead:
-
-  irm https://trymimicode.github.io/install.ps1 | iex
-
-Or if you prefer Git Bash, install manually:
-  1. Download Python from https://www.python.org/downloads (add to PATH)
-  2. pip install -r requirements.txt
-  3. choco install ripgrep (or scoop install ripgrep)
-  4. python agent.py --tui
-"
-    else
-        fail "Unsupported OS: $OSTYPE
-
-This installer supports:
-  • macOS (via bash)
-  • Linux (via bash)
-  • Windows (use: irm https://trymimicode.github.io/install.ps1 | iex)
-"
-    fi
-}
-
-check_command() {
-    if ! command -v "$1" &> /dev/null; then
-        return 1
-    fi
-    return 0
-}
-
-install_ripgrep() {
-    print_info "Installing ripgrep..."
-
-    if check_command brew; then
-        brew install ripgrep
-    elif check_command apt-get; then
-        sudo apt-get update && sudo apt-get install -y ripgrep
-    elif check_command dnf; then
-        sudo dnf install -y ripgrep
-    elif check_command pacman; then
-        sudo pacman -S --noconfirm ripgrep
-    elif check_command zypper; then
-        sudo zypper install -y ripgrep
-    else
-        fail "Could not determine package manager. Please install ripgrep manually from https://github.com/BurntSushi/ripgrep/releases"
-    fi
-
-    if check_command rg; then
-        print_success "ripgrep installed"
-    else
-        fail "ripgrep installation failed"
-    fi
-}
-
-check_prerequisites() {
-    print_header "Checking Prerequisites"
-
-    # Check Python 3
-    if ! check_command python3; then
-        fail "Python 3 is not installed. Please install Python 3.9+ first."
-    fi
-    PYTHON_VERSION=$(python3 --version | awk '{print $2}')
-    print_success "Python $PYTHON_VERSION found"
-
-    # Check pip
-    if ! check_command pip3; then
-        fail "pip3 is not installed. Please install pip3."
-    fi
-    print_success "pip3 found"
-
-    # Check/install ripgrep
-    if ! check_command rg; then
-        print_info "ripgrep not found"
-        install_ripgrep
-    else
-        print_success "ripgrep found"
-    fi
-
-    # Warn about git (optional but recommended)
-    if ! check_command git; then
-        print_info "git not found (recommended for future updates)"
-    else
-        print_success "git found"
-    fi
-}
-
-clone_mimicode() {
-    print_header "Setting Up mimicode"
-
-    if [ -d "$INSTALL_DIR" ]; then
-        print_info "mimicode already exists at $INSTALL_DIR"
-        print_info "Updating existing installation..."
-        cd "$INSTALL_DIR"
-        if [ -d ".git" ]; then
-            git pull origin main 2>/dev/null || print_info "Could not pull latest (offline or not a git repo)"
-        fi
-    else
-        print_info "Cloning mimicode to $INSTALL_DIR..."
-        mkdir -p "$(dirname "$INSTALL_DIR")"
-        git clone "$GITHUB_REPO" "$INSTALL_DIR" || fail "Failed to clone repository"
-    fi
-
-    print_success "mimicode ready at $INSTALL_DIR"
-}
-
-setup_python_env() {
-    print_header "Setting Up Python Environment"
-
-    cd "$INSTALL_DIR"
-
-    # Create virtual environment
-    if [ ! -d "$VENV_DIR" ]; then
-        print_info "Creating virtual environment..."
-        python3 -m venv "$VENV_DIR"
-        print_success "Virtual environment created"
-    else
-        print_info "Virtual environment already exists"
-    fi
-
-    # Activate and install dependencies
-    print_info "Installing Python dependencies..."
-    source "$VENV_DIR/bin/activate"
-    pip install --upgrade pip setuptools wheel > /dev/null 2>&1
-    pip install -r requirements.txt > /dev/null 2>&1 || fail "Failed to install dependencies"
-    print_success "Python dependencies installed"
-}
-
+# ── Add INSTALL_DIR to PATH using the right profile for the active shell ──────
 add_to_path() {
-    print_header "Adding to PATH"
+    # Already reachable in this session — nothing to wire up.
+    case ":$PATH:" in
+        *":$INSTALL_DIR:"*) return 0 ;;
+    esac
 
-    mkdir -p "$BIN_DIR"
+    local shell_name profile line
+    shell_name="$(basename "${SHELL:-sh}")"
+    case "$shell_name" in
+        zsh)
+            profile="${ZDOTDIR:-$HOME}/.zshrc"
+            line="export PATH=\"$INSTALL_DIR:\$PATH\""
+            ;;
+        bash)
+            # macOS login shells read .bash_profile; Linux uses .bashrc.
+            if [ "$OS" = "darwin" ]; then profile="$HOME/.bash_profile"; else profile="$HOME/.bashrc"; fi
+            line="export PATH=\"$INSTALL_DIR:\$PATH\""
+            ;;
+        fish)
+            profile="$HOME/.config/fish/config.fish"
+            line="fish_add_path \"$INSTALL_DIR\""
+            mkdir -p "$(dirname "$profile")"
+            ;;
+        *)
+            profile="$HOME/.profile"
+            line="export PATH=\"$INSTALL_DIR:\$PATH\""
+            ;;
+    esac
 
-    # Create wrapper script
-    WRAPPER="$BIN_DIR/mimicode"
-    cat > "$WRAPPER" << 'EOF'
-#!/bin/bash
-source "$HOME/.local/mimicode/venv/bin/activate"
-exec python3 "$HOME/.local/mimicode/agent.py" "$@"
-EOF
-
-    chmod +x "$WRAPPER"
-    print_success "Wrapper script created at $WRAPPER"
-
-    # Check if ~/.local/bin is in PATH
-    if [[ ":$PATH:" == *":$BIN_DIR:"* ]]; then
-        print_success "$BIN_DIR is already in PATH"
+    touch "$profile"
+    if grep -qF "$INSTALL_DIR" "$profile" 2>/dev/null; then
+        echo "✓ PATH entry already present in $profile"
     else
-        print_info "Adding $BIN_DIR to PATH..."
-
-        # Detect shell
-        if [ -n "$ZSH_VERSION" ]; then
-            SHELL_RC="$HOME/.zshrc"
-        else
-            SHELL_RC="$HOME/.bashrc"
-        fi
-
-        if ! grep -q "$BIN_DIR" "$SHELL_RC"; then
-            echo "export PATH=\"$BIN_DIR:\$PATH\"" >> "$SHELL_RC"
-            print_success "Added to $SHELL_RC"
-        fi
-
-        print_info "Run this to update your current shell:"
-        print_info "  source $SHELL_RC"
+        printf '\n# Added by mimicode installer\n%s\n' "$line" >> "$profile"
+        echo "✓ Added $INSTALL_DIR to PATH in $profile"
     fi
+    echo "  Restart your shell or run: source \"$profile\""
 }
+add_to_path
 
-verify_installation() {
-    print_header "Verifying Installation"
+# ── Verify ───────────────────────────────────────────────────────────────────
+if ! "$INSTALL_DIR/$BINARY_NAME" --version >/dev/null 2>&1; then
+    echo "⚠️  Installed but '$BINARY_NAME --version' failed — check the output above."
+fi
 
-    source "$VENV_DIR/bin/activate"
-    cd "$INSTALL_DIR"
-
-    # Run dependency check
-    if python3 check_deps.py > /dev/null 2>&1; then
-        print_success "All dependencies verified"
-    else
-        print_info "Running dependency check..."
-        python3 check_deps.py || print_info "Some dependencies may need attention, but mimicode should work"
-    fi
-}
-
-show_usage() {
-    print_header "Installation Complete!"
-
+# ── Dependency / environment checks ──────────────────────────────────────────
+if ! command -v rg >/dev/null 2>&1; then
     echo ""
-    echo -e "${GREEN}mimicode is ready to use!${NC}"
-    echo ""
-    echo "Quick start:"
-    echo -e "  ${YELLOW}mimicode${NC}              # Start interactive mode"
-    echo -e "  ${YELLOW}mimicode \"prompt\"${NC}    # Run a single task"
-    echo -e "  ${YELLOW}mimicode --tui${NC}        # Start TUI mode"
-    echo ""
-    echo "Set your API key:"
-    echo -e "  ${YELLOW}export ANTHROPIC_API_KEY=\"sk-ant-...\"${NC}"
-    echo ""
-    echo "Location: $INSTALL_DIR"
-    echo ""
-    echo "Need help? Run: mimicode --help"
-    echo ""
-}
+    echo "⚠️  ripgrep (rg) is required but not installed."
+    case "$OS" in
+        darwin) echo "   Install: brew install ripgrep" ;;
+        linux)  echo "   Install: sudo apt install ripgrep   # Debian/Ubuntu"
+                echo "            sudo dnf install ripgrep   # Fedora" ;;
+    esac
+fi
 
-# Main installation flow
-main() {
-    print_header "mimicode Installer"
+if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+    echo ""
+    echo "⚠️  ANTHROPIC_API_KEY not set."
+    echo "   Get a key at https://console.anthropic.com/settings/keys then add:"
+    echo "     export ANTHROPIC_API_KEY=\"your-key-here\""
+fi
 
-    detect_os
-    check_prerequisites
-    clone_mimicode
-    setup_python_env
-    add_to_path
-    verify_installation
-    show_usage
-}
-
-main "$@"
+echo ""
+echo "✅ Installation complete!"
+echo ""
+echo "Usage:"
+echo "  $BINARY_NAME \"add tests to calc.go\""
+echo "  $BINARY_NAME --tui"
+echo "  $BINARY_NAME -s myfeature \"continue working\""
+echo ""
+echo "Docs: https://github.com/$REPO"
