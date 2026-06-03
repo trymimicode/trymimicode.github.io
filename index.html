@@ -330,12 +330,6 @@
       margin-bottom: 260px;
     }
 
-    .stats-meta .demo-tag {
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      margin-left: 4px;
-    }
-
     /* ── Stats strip ── */
     .stats-strip {
       display: grid;
@@ -371,6 +365,12 @@
       line-height: 1.4;
     }
 
+    .stat-label code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text);
+    }
+
     /* ── Section eyebrow ── */
     .section-eyebrow {
       font-size: 11px;
@@ -397,6 +397,58 @@
     }
 
     .why-body:last-child { margin-bottom: 0; }
+
+    .why-body code,
+    .sub-tagline code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+
+    /* ── Features grid (matches stats strip) ── */
+    .features-section {
+      width: 100%;
+      margin-top: 80px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .mini-cell {
+      background: var(--surface);
+      padding: 22px 20px;
+    }
+
+    .mini-cell h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .mini-cell p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .mini-cell code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text);
+    }
 
     /* ── Comparison table ── */
     .compare-section {
@@ -446,42 +498,6 @@
     .compare-val.bad  { color: var(--muted); }
     .compare-val.good { color: var(--text);  }
 
-    .compare-bar-wrap {
-      width: 100%;
-      margin-top: 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: 180px 1fr 64px;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .bar-label { font-size: 12px; color: var(--muted); }
-
-    .bar-track {
-      height: 6px;
-      border-radius: 999px;
-      background: var(--surface2);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: width 1s cubic-bezier(0.16,1,0.3,1);
-    }
-
-    .bar-fill.them { background: var(--dim); }
-    .bar-fill.us   { background: var(--text); }
-
-    .bar-pct { font-size: 12px; font-family: var(--font-mono); color: var(--muted); text-align: right; }
-
     /* ── Footer ── */
     footer {
       width: 100%;
@@ -509,8 +525,8 @@
       }
 
       .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .mini-grid { grid-template-columns: repeat(2, 1fr); }
       .compare-header, .compare-row { grid-template-columns: 1fr 100px 100px; }
-      .bar-row { grid-template-columns: 120px 1fr 50px; }
     }
 
     @media (max-width: 500px) {
@@ -525,6 +541,7 @@
 
       .nav-links { display: none; }
       .stats-strip { grid-template-columns: 1fr 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -534,10 +551,10 @@
     <nav>
       <a class="nav-logo" href="#">mimicode</a>
       <ul class="nav-links">
-        <li><a href="#why">why</a></li>
-        <li><a href="#compare">compare</a></li>
+        <li><a href="#philosophy">philosophy</a></li>
+        <li><a href="#features">features</a></li>
         <li><a href="/docs.html">docs</a></li>
-        <li><a href="https://github.com/alvinliju/mimicode" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
       </ul>
     </nav>
   </header>
@@ -549,13 +566,12 @@
       <h1>mimicode</h1>
 
       <p class="tagline">
-        A <strong>memory-efficient</strong>, <strong>token-optimized</strong> coding agent
-        built to do more with less. No bloat. No waste.
+        <strong>Code in a file, not a textbox.</strong>
       </p>
 
       <p class="sub-tagline">
-        mimicode tracks only what matters — keeping context tight, tokens lean,
-        and every action deliberate. Ship faster without burning through your budget.
+        Open <code>code.mimi</code> in your editor, write a question, save — the answer lands below a divider
+        in the same file. No chat window. No tab switching. Still beta.
       </p>
 
       <div class="install-wrap">
@@ -578,11 +594,11 @@
                 </svg>
                 Windows
               </div>
-              <div class="dropdown-item" data-cmd="pip install mimicode" data-label="pip (Python)">
+              <div class="dropdown-item" data-cmd="go install github.com/trymimicode/mimicode-go/cmd/mimicode@latest" data-label="Go install">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 2C8 2 5 4 5 8v2c0 2 1 3 3 4v2c0 2 2 4 4 4s4-2 4-4v-2c2-1 3-2 3-4V8c0-4-3-6-7-6z"/>
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                pip (Python)
+                Go install
               </div>
             </div>
           </div>
@@ -599,7 +615,7 @@
           </div>
         </div>
 
-        <a class="guide-btn" href="#">
+        <a class="guide-btn" href="/docs.html#quickstart">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -616,113 +632,111 @@
     />
 
     <!-- ── Stats strip ── -->
-    <div class="stats-meta">statistics <span class="demo-tag">(demo)</span></div>
+    <div class="stats-meta">at a glance</div>
     <div class="stats-strip">
       <div class="stat-cell">
-        <div class="stat-number">85.7%</div>
-        <div class="stat-label">pass rate on internal suite<br>(6/7 tasks)</div>
+        <div class="stat-number">0</div>
+        <div class="stat-label">chat tabs required<br>stay in your editor</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">62%</div>
-        <div class="stat-label">less avg input tokens per task<br>vs ~12.4k industry avg</div>
+        <div class="stat-number">1</div>
+        <div class="stat-label">notebook file per project<br><code>code.mimi</code> is the UI</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">$0.15</div>
-        <div class="stat-label">est. session cost (10-turn)<br>vs $0.42 all-Sonnet</div>
+        <div class="stat-number">11</div>
+        <div class="stat-label">tools in one agent<br>bash, edit, web, memory…</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">73%</div>
-        <div class="stat-label">cache hit rate<br>vs 18–25% industry avg</div>
+        <div class="stat-number">100%</div>
+        <div class="stat-label">turns logged locally<br><code>events.jsonl</code> audit trail</div>
       </div>
     </div>
 
-    <!-- ── Why ── -->
-    <div class="why-section" id="why">
-      <div class="section-eyebrow">why mimicode</div>
+    <div class="why-section" id="philosophy">
+      <div class="section-eyebrow">philosophy</div>
       <p class="why-body">
-        Most coding agents treat tokens like they're free. They load your whole codebase, narrate every step,
-        and ask the model to figure out what's relevant. It works — but it's wasteful, slow, and expensive.
+        mimicode is not a pair programmer. It does not pick architectures, debate tradeoffs, or volunteer opinions.
+        It is a tool in the Unix sense — a rubber duck that can search your repo, run commands, and make mechanical edits
+        when you ask.
       </p>
       <p class="why-body">
-        mimicode starts from the opposite assumption: the model works best when it only sees what it needs.
-        So before anything is sent, context is pruned. Files are targeted, not explored. Prompts are compressed,
-        not padded. Every action is planned once, not negotiated across five back-and-forth rounds.
-      </p>
-      <p class="why-body">
-        The result is an agent that's quieter, leaner, and cheaper to run — without being any less capable.
-        You get the same quality of output, just without burning through your API budget to get there.
+        mimi diffs every save against the last snapshot, so only new text becomes input. Its own answers are never
+        replayed as prompts. Memory lives in flat markdown; every tool call lands in
+        <code>~/.mimi/sessions/&lt;id&gt;/events.jsonl</code>.
       </p>
     </div>
 
-    <!-- ── Comparison ── -->
+    <div class="features-section" id="features">
+      <div class="section-eyebrow">features</div>
+      <div class="mini-grid">
+        <div class="mini-cell">
+          <h3>Watch mode</h3>
+          <p><code>mimicode watch</code> — write in <code>code.mimi</code>, save, read the answer in-file.</p>
+        </div>
+        <div class="mini-cell">
+          <h3>Shadow-git undo</h3>
+          <p><code>:undo</code> in REPL reverts turns. Your real <code>.git</code> is never touched.</p>
+        </div>
+        <div class="mini-cell">
+          <h3>Confirm mode</h3>
+          <p><code>--confirm</code> gates bash, write, and edit. Read-only tools never prompt.</p>
+        </div>
+        <div class="mini-cell">
+          <h3>Stuck recovery</h3>
+          <p>Repeats and error loops stop with a diagnosis — no silent retries.</p>
+        </div>
+        <div class="mini-cell">
+          <h3>FTS memory</h3>
+          <p>Search <code>.mimi/MEMORY.md</code>, rules, and past sessions on disk.</p>
+        </div>
+        <div class="mini-cell">
+          <h3>Single Go binary</h3>
+          <p>Prebuilt install. No Python runtime. REPL and TUI when you want them.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="compare-section" id="compare">
-      <div class="section-eyebrow" style="margin-bottom:24px">mimicode vs typical agent</div>
+      <div class="section-eyebrow" style="margin-bottom:24px">vs typical chat agent</div>
 
       <div class="compare-header">
-        <span>metric</span>
-        <span>typical agent</span>
+        <span></span>
+        <span>typical</span>
         <span class="col-mimi">mimicode</span>
       </div>
 
       <div class="compare-row">
-        <span class="compare-metric">Avg tokens per task</span>
-        <span class="compare-val bad">~12,400</span>
-        <span class="compare-val good">~4,753</span>
+        <span class="compare-metric">Where you work</span>
+        <span class="compare-val bad">sidebar chat</span>
+        <span class="compare-val good">code.mimi</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Cache hit rate</span>
-        <span class="compare-val bad">~22%</span>
-        <span class="compare-val good">73%</span>
+        <span class="compare-metric">Install</span>
+        <span class="compare-val bad">runtime + deps</span>
+        <span class="compare-val good">one binary</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Avg cost per session</span>
-        <span class="compare-val bad">$0.42</span>
-        <span class="compare-val good">$0.15</span>
+        <span class="compare-metric">Session history</span>
+        <span class="compare-val bad">opaque</span>
+        <span class="compare-val good">events.jsonl</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Tool error rate</span>
-        <span class="compare-val bad">8–12%</span>
-        <span class="compare-val good">4.3%</span>
+        <span class="compare-metric">Undo edits</span>
+        <span class="compare-val bad">manual</span>
+        <span class="compare-val good">:undo</span>
       </div>
       <div class="compare-row">
-        <span class="compare-metric">Suite pass rate (industry est.)</span>
-        <span class="compare-val bad">~70%</span>
-        <span class="compare-val good">85.7%</span>
+        <span class="compare-metric">Role</span>
+        <span class="compare-val bad">co-pilot</span>
+        <span class="compare-val good">Unix tool</span>
       </div>
-      <div class="compare-row">
-        <span class="compare-metric">Context pruning</span>
-        <span class="compare-val bad">none</span>
-        <span class="compare-val good">aggressive</span>
-      </div>
-
-      <!-- Visual bar comparison -->
-      <div class="compare-bar-wrap" style="margin-top:40px">
-        <div class="section-eyebrow">token usage — normalized to task complexity</div>
-
-        <div class="bar-row">
-          <span class="bar-label">typical agent</span>
-          <div class="bar-track">
-            <div class="bar-fill them" id="barThem" style="width:0%"></div>
-          </div>
-          <span class="bar-pct">100%</span>
-        </div>
-
-        <div class="bar-row">
-          <span class="bar-label">mimicode</span>
-          <div class="bar-track">
-            <div class="bar-fill us" id="barUs" style="width:0%"></div>
-          </div>
-          <span class="bar-pct">38%</span>
-        </div>
-      </div>
-
     </div>
 
   </main>
 
   <footer>
     <span>mimicode &copy; 2026</span>
-    <span>memory-efficient &middot; token-optimized &middot; minimal</span>
+    <span>notebook-first &middot; auditable &middot; Go</span>
   </footer>
 
   <script>
@@ -769,22 +783,6 @@
       tooltip.textContent = 'Copied!';
       setTimeout(() => { copyBtn.classList.remove('copied'); tooltip.textContent = 'Copy'; }, 1800);
     });
-
-    // ── Animate bars on scroll ──
-    const barThem = document.getElementById('barThem');
-    const barUs   = document.getElementById('barUs');
-
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          barThem.style.width = '100%';
-          barUs.style.width   = '38%';
-          io.disconnect();
-        }
-      });
-    }, { threshold: 0.4 });
-
-    io.observe(barThem.closest('.compare-bar-wrap'));
 
     // ── Sticky nav ──
     const hdr = document.querySelector('header');
