@@ -496,21 +496,6 @@
     .compare-val.bad  { color: var(--muted); }
     .compare-val.good { color: var(--text);  }
 
-    /* ── Footer ── */
-    footer {
-      width: 100%;
-      max-width: 920px;
-      padding: 24px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    footer span { font-size: 12px; color: var(--muted); }
-
     /* ── Responsive ── */
     @media (max-width: 720px) {
       .hero-image { transform: scale(1.18); margin-bottom: 110px; }
@@ -725,7 +710,11 @@
 
   <footer>
     <span>mimicode &copy; 2026</span>
-    <span>notebook-first &middot; auditable &middot; Go</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
   </footer>
 
   <script>

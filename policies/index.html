@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>Policies &mdash; mimicode</title>
+  <meta name="description" content="Legal policies for mimicode: Privacy Policy, Terms of Service, and Disclaimer covering AI output accuracy, file modifications, shell commands, and data handling.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/policies/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/policies/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:title" content="Policies &mdash; mimicode">
+  <meta property="og:description" content="Privacy Policy, Terms of Service, and Disclaimer for mimicode.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/image.png">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" type="image/png" href="../assets/templogomimicode.png">
+
+  <!-- ── Structured data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Policies — mimicode",
+    "description": "Legal policies for mimicode: Privacy Policy, Terms of Service, and Disclaimer.",
+    "url": "https://mimicode.xyz/policies/",
+    "hasPart": [
+      { "@type": "WebPage", "name": "Privacy Policy",    "url": "https://mimicode.xyz/policies/privacy/" },
+      { "@type": "WebPage", "name": "Terms of Service",  "url": "https://mimicode.xyz/policies/terms/" },
+      { "@type": "WebPage", "name": "Disclaimer",         "url": "https://mimicode.xyz/policies/disclaimer/" }
+    ],
+    "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .page-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .page-header p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Policy list ── */
+    .policy-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .policy-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .policy-item:first-child { border-top: 1px solid var(--border); }
+
+    .policy-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .policy-item h2 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      transition: color 0.15s;
+    }
+
+    .policy-item:hover h2 { color: var(--text); opacity: 0.8; }
+
+    .policy-arrow {
+      font-size: 16px;
+      color: var(--subtle);
+      transition: transform 0.2s, color 0.15s;
+      flex-shrink: 0;
+    }
+
+    .policy-item:hover .policy-arrow {
+      transform: translateX(4px);
+      color: var(--muted);
+    }
+
+    .policy-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .policy-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="eyebrow">Legal</div>
+      <h1>Policies</h1>
+      <p>Legal policies governing the use of mimicode and this website. Last updated June 4, 2026.</p>
+    </div>
+
+    <nav class="policy-list" aria-label="Policy documents">
+
+      <a class="policy-item" href="/policies/privacy/">
+        <div class="policy-item-header">
+          <h2>Privacy Policy</h2>
+          <span class="policy-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <p>mimicode collects no telemetry or user data. The CLI tool runs entirely on your machine. Covers what information exists, where it lives, and what Anthropic receives when you use the API.</p>
+        <div class="policy-tag">data &middot; API keys &middot; local storage</div>
+      </a>
+
+      <a class="policy-item" href="/policies/terms/">
+        <div class="policy-item-header">
+          <h2>Terms of Service</h2>
+          <span class="policy-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <p>Covers your responsibilities as a user: API key ownership, usage costs, acceptable use, the agent's real-world capabilities, and the limits of our liability.</p>
+        <div class="policy-tag">API costs &middot; acceptable use &middot; liability</div>
+      </a>
+
+      <a class="policy-item" href="/policies/disclaimer/">
+        <div class="policy-item-header">
+          <h2>Disclaimer</h2>
+          <span class="policy-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <p>AI outputs may be inaccurate or introduce security vulnerabilities. The <code style="font-family:var(--font-mono);font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 5px">bash</code> tool runs real shell commands. File edits are immediate. Use <code style="font-family:var(--font-mono);font-size:12px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 5px">--confirm</code> mode on sensitive systems.</p>
+        <div class="policy-tag">AI accuracy &middot; bash &middot; file edits &middot; risk</div>
+      </a>
+
+    </nav>
+  </main>
+
+  <footer>
+    <span>mimicode &copy; 2026</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
+  </script>
+
+</body>
+</html>

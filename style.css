@@ -157,3 +157,34 @@ nav {
     font-size: 15px;
   }
 }
+
+/* ── Footer ── */
+footer {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+footer span { font-size: 12px; color: var(--muted); }
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-nav a {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-nav a:hover,
+.footer-nav a.active { color: var(--text); }

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>Terms of Service &mdash; mimicode</title>
+  <meta name="description" content="mimicode's Terms of Service. Covers API key responsibilities, acceptable use, AI output limitations, file modification risks, and liability.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/policies/terms/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/policies/terms/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:title" content="Terms of Service &mdash; mimicode">
+  <meta property="og:description" content="mimicode's Terms of Service. Covers API key responsibilities, acceptable use, AI output limitations, and liability.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/image.png">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" type="image/png" href="../../assets/templogomimicode.png">
+
+  <!-- ── Structured data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Terms of Service — mimicode",
+    "description": "mimicode's Terms of Service.",
+    "url": "https://mimicode.xyz/policies/terms/",
+    "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .policy-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .policy-header p {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .policy-body {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .policy-section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .policy-section p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul {
+      margin: 0 0 10px 0;
+      padding-left: 22px;
+    }
+
+    .policy-section li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+
+    .policy-section code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .policy-section a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+
+    .policy-section a:hover { color: var(--text); }
+
+    .caps {
+      font-size: 13px;
+      color: var(--subtle);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="policy-header">
+      <div class="eyebrow">Legal</div>
+      <h1>Terms of Service</h1>
+      <p>Effective June 4, 2026</p>
+    </div>
+
+    <div class="policy-body">
+
+      <div class="policy-section">
+        <h2>1. Acceptance</h2>
+        <p>By downloading, installing, or using mimicode, you agree to these Terms of Service. If you do not agree, do not use the software or this website.</p>
+        <p>These Terms apply to the mimicode CLI tool and the mimicode.xyz website. They do not replace the open-source license that governs the source code — see the repository for that.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>2. What mimicode Is</h2>
+        <p>mimicode is an open-source, command-line AI coding tool that runs locally on your machine. It connects to Anthropic's API using a key you provide, and can execute shell commands, read and write files, search the web, and maintain session memory on your behalf.</p>
+        <p>The source code is available at <a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go</a>.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>3. Your API Key and Costs</h2>
+        <p>You must supply your own Anthropic API key to use mimicode. You are solely responsible for:</p>
+        <ul>
+          <li>The security and confidentiality of your API key</li>
+          <li>All API usage costs billed to your Anthropic account as a result of using mimicode</li>
+          <li>Complying with <a href="https://www.anthropic.com/policies/usage-policies" target="_blank" rel="noopener">Anthropic's Usage Policies</a></li>
+        </ul>
+        <p>We are not a party to your relationship with Anthropic. We have no visibility into your API usage, billing, or account status. If you believe your key has been compromised, revoke it from your Anthropic dashboard immediately.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>4. The Agent's Capabilities and Your Responsibility</h2>
+        <p>mimicode's agent can execute shell commands, read and write files on your filesystem, and make outbound network requests. These actions have real, immediate effects on your system and environment. You are responsible for:</p>
+        <ul>
+          <li>All commands executed and files modified by the agent</li>
+          <li>Using <code>--confirm</code> mode (<code>MIMICODE_CONFIRM=1</code>) when working on sensitive or production systems</li>
+          <li>Maintaining independent backups of important files separate from mimicode's undo feature</li>
+          <li>Any downstream consequences of agent-initiated actions, including data loss, misconfiguration, or unintended side effects</li>
+        </ul>
+        <p>The shadow-git undo feature can revert recent turns but is not guaranteed to be complete or recoverable in all scenarios.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>5. Acceptable Use</h2>
+        <p>You may use mimicode for any lawful purpose consistent with these Terms. You may not use mimicode to:</p>
+        <ul>
+          <li>Generate code or content that violates applicable laws or regulations</li>
+          <li>Circumvent, abuse, or violate Anthropic's Usage Policies</li>
+          <li>Attack, probe, or exploit systems you do not own or have explicit permission to test</li>
+          <li>Process or expose personal data in violation of applicable privacy laws</li>
+          <li>Conduct any activity intended to cause harm to others or their systems</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2>6. AI-Generated Output</h2>
+        <p>All text, code, and advice produced by mimicode is generated by an AI model. It may be inaccurate, incomplete, outdated, or unsuitable for your specific use case. You are responsible for reviewing, testing, and validating all AI output before acting on it or deploying it. See the <a href="/policies/disclaimer/">Disclaimer</a> for full details.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. Open Source License</h2>
+        <p>mimicode is open-source software. The license governing your rights to use, copy, modify, and distribute the source code is found in the repository at <a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go</a>. These Terms of Service govern your use of the software as a tool and the mimicode.xyz website — they do not supersede the open-source license for source code use.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>8. No Warranty</h2>
+        <p class="caps">THE SOFTWARE AND WEBSITE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, OR NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE, UNINTERRUPTED, OR FREE OF HARMFUL COMPONENTS.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>9. Limitation of Liability</h2>
+        <p class="caps">TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, MIMICODE AND ITS AUTHORS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES — INCLUDING BUT NOT LIMITED TO LOSS OF DATA, LOSS OF PROFITS, SYSTEM DAMAGE, SECURITY BREACHES, OR CORRUPTION OF FILES — ARISING OUT OF OR RELATING TO YOUR USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>10. Modifications</h2>
+        <p>We reserve the right to modify these Terms at any time. Changes take effect when posted to this page. The "Effective" date at the top will reflect the most recent revision. Continued use of mimicode after a change constitutes your acceptance of the revised Terms.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>11. Contact</h2>
+        <p>Questions about these Terms? Open an issue or discussion at <a href="https://github.com/trymimicode/mimicode-go/issues" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go/issues</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>mimicode &copy; 2026</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/" class="active">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
+  </script>
+
+</body>
+</html>
