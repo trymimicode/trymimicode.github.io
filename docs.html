@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mimicode — Documentation</title>
+  <title>mimicode | Documentation</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -41,7 +41,7 @@
       flex-direction: column;
     }
 
-    /* ── Nav ── */
+    /* Nav */
     header {
       position: sticky;
       top: 0;
@@ -96,7 +96,7 @@
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active { color: var(--accent); }
 
-    /* ── Layout ── */
+    /* Layout */
     main {
       flex: 1;
       width: 100%;
@@ -108,7 +108,7 @@
       gap: 60px;
     }
 
-    /* ── Sidebar ── */
+    /* Sidebar */
     aside {
       position: sticky;
       top: 100px;
@@ -162,7 +162,7 @@
       font-weight: 500;
     }
 
-    /* ── Content ── */
+    /* Content */
     .content {
       display: flex;
       flex-direction: column;
@@ -221,7 +221,7 @@
 
     a:hover { text-decoration: underline; }
 
-    /* ── Code ── */
+    /* Code */
     code {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -251,7 +251,7 @@
       color: var(--text);
     }
 
-    /* ── Lists ── */
+    /* Lists */
     ul, ol {
       margin-bottom: 16px;
       padding-left: 24px;
@@ -264,7 +264,7 @@
 
     li strong { color: var(--text); }
 
-    /* ── Info boxes ── */
+    /* Info boxes */
     .info-box {
       background: rgba(129, 140, 248, 0.08);
       border: 1px solid rgba(129, 140, 248, 0.2);
@@ -287,7 +287,7 @@
 
     .warning-box strong { color: #ef4444; }
 
-    /* ── Table ── */
+    /* Table */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -314,7 +314,7 @@
       font-size: 12px;
     }
 
-    /* ── Responsive ── */
+    /* Responsive */
     @media (max-width: 900px) {
       main {
         grid-template-columns: 1fr;
@@ -348,7 +348,7 @@
       <ul class="nav-links">
         <li><a href="/">home</a></li>
         <li><a href="/docs.html" class="active">docs</a></li>
-        <li><a href="https://github.com/alvinliju/mimicode" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
       </ul>
     </nav>
   </header>
@@ -360,7 +360,7 @@
         <ul class="sidebar-nav">
           <li><a href="#install" class="sidebar-link">Installation</a></li>
           <li><a href="#quickstart" class="sidebar-link">Quick Start</a></li>
-          <li><a href="#setup" class="sidebar-link">Setup</a></li>
+          <li><a href="#setup" class="sidebar-link">Configuration</a></li>
         </ul>
       </div>
 
@@ -374,18 +374,17 @@
       </div>
 
       <div class="sidebar-section">
-        <div class="sidebar-title">Research & Design</div>
+        <div class="sidebar-title">Reference</div>
         <ul class="sidebar-nav">
-          <li><a href="#philosophy" class="sidebar-link">Philosophy</a></li>
+          <li><a href="#tools" class="sidebar-link">Tools</a></li>
           <li><a href="#architecture" class="sidebar-link">Architecture</a></li>
-          <li><a href="#tools" class="sidebar-link">Core Tools</a></li>
+          <li><a href="#philosophy" class="sidebar-link">Philosophy</a></li>
         </ul>
       </div>
 
       <div class="sidebar-section">
-        <div class="sidebar-title">Reference</div>
+        <div class="sidebar-title">Help</div>
         <ul class="sidebar-nav">
-          <li><a href="#api" class="sidebar-link">API & Providers</a></li>
           <li><a href="#faq" class="sidebar-link">FAQ</a></li>
           <li><a href="#troubleshooting" class="sidebar-link">Troubleshooting</a></li>
         </ul>
@@ -394,45 +393,28 @@
 
     <div class="content">
 
-      <!-- Getting Started -->
+      <!-- Installation -->
       <section class="doc-section" id="install">
         <h2>Installation</h2>
-        <p>mimicode works on macOS, Linux, and Windows. Choose your platform:</p>
+        <p>mimicode ships as a single prebuilt binary. No runtime or interpreter required.</p>
 
         <h3>macOS / Linux</h3>
         <pre><code>curl -fsSL https://trymimicode.github.io/install.sh | bash</code></pre>
-        <p>The installer will:</p>
-        <ul>
-          <li>Check for Python 3 and pip</li>
-          <li>Install ripgrep (if needed)</li>
-          <li>Clone the repository to <code>~/.local/mimicode</code></li>
-          <li>Create a Python virtual environment</li>
-          <li>Install dependencies</li>
-          <li>Add mimicode to your PATH</li>
-        </ul>
+        <p>The installer detects your OS and architecture, downloads the correct binary to <code>~/.local/bin</code>, and wires up your PATH.</p>
 
         <h3>Windows</h3>
         <pre><code>irm https://trymimicode.github.io/install.ps1 | iex</code></pre>
-        <p>The PowerShell installer will:</p>
-        <ul>
-          <li>Check Python 3 installation</li>
-          <li>Auto-install ripgrep (via scoop, choco, or direct download)</li>
-          <li>Clone to <code>%LOCALAPPDATA%\mimicode</code></li>
-          <li>Setup virtual environment</li>
-          <li>Install Python dependencies</li>
-          <li>Create command wrapper and add to PATH</li>
-        </ul>
 
-        <h3>Manual Installation</h3>
-        <pre><code>git clone https://github.com/alvinliju/mimicode
-cd mimicode
-python3 -m venv venv
-source venv/bin/activate  # or: venv\Scripts\activate on Windows
-pip install -r requirements.txt
-python3 check_deps.py</code></pre>
+        <h3>Go install</h3>
+        <pre><code>go install github.com/trymimicode/mimicode-go/cmd/mimicode@latest</code></pre>
+
+        <h3>Build from source</h3>
+        <pre><code>git clone https://github.com/trymimicode/mimicode-go.git
+cd mimicode-go
+make install</code></pre>
 
         <div class="info-box">
-          <strong>Requires:</strong> Python 3.9+, pip, and ripgrep (rg)
+          <strong>Requirements:</strong> <a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener">ripgrep</a> and an <code>ANTHROPIC_API_KEY</code>. No Python, no Node, no other dependencies.
         </div>
       </section>
 
@@ -440,308 +422,389 @@ python3 check_deps.py</code></pre>
       <section class="doc-section" id="quickstart">
         <h2>Quick Start</h2>
 
-        <h3>1. Set Your API Key</h3>
+        <h3>1. Set your API key</h3>
         <pre><code>export ANTHROPIC_API_KEY="sk-ant-..."</code></pre>
-        <p>On Windows, use:</p>
+        <p>On Windows:</p>
         <pre><code>$env:ANTHROPIC_API_KEY = "sk-ant-..."</code></pre>
+        <p>Or store it permanently with the built-in key command:</p>
+        <pre><code>mimicode key set sk-ant-...</code></pre>
 
-        <h3>2. Run mimicode</h3>
-        <pre><code>mimicode</code></pre>
-        <p>This starts an interactive REPL session where you can give it tasks.</p>
+        <h3>2. Start watch mode</h3>
+        <pre><code>mimicode watch</code></pre>
+        <p>A file called <code>code.mimi</code> appears in your project directory. Open it in your editor.</p>
 
-        <h3>3. Give It a Task</h3>
-        <pre><code>&gt;&gt; read src/main.py and explain what it does</code></pre>
-        <p>mimicode will use its tools to complete the task and report back.</p>
+        <h3>3. Write a question and save</h3>
+        <pre><code>why does this handler fire twice on the first request?</code></pre>
+        <p>Save the file. mimicode diffs the new text, runs the agent, and writes the answer back into the same file below a divider. No tab switching. No chat window.</p>
 
         <div class="info-box">
-          <strong>Tip:</strong> Your conversations are saved to <code>sessions/</code> and can be resumed later.
+          <strong>Tip:</strong> mimicode only reacts to new text. Its own answers are never replayed as input. Write anywhere in the file, edit in place, or clear and start fresh.
         </div>
       </section>
 
-      <!-- Setup -->
+      <!-- Configuration -->
       <section class="doc-section" id="setup">
-        <h2>Setup & Configuration</h2>
+        <h2>Configuration</h2>
 
-        <h3>Environment Variables</h3>
+        <h3>Environment variables</h3>
         <table>
           <thead>
             <tr>
               <th>Variable</th>
+              <th>Default</th>
               <th>Description</th>
-              <th>Example</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><code>ANTHROPIC_API_KEY</code></td>
-              <td>Your Anthropic API key (required)</td>
-              <td><code>sk-ant-...</code></td>
+              <td>required</td>
+              <td>Anthropic API key</td>
             </tr>
             <tr>
-              <td><code>MIMICODE_DIR</code></td>
-              <td>Sessions and cache location</td>
-              <td><code>~/.mimicode</code></td>
+              <td><code>MIMICODE_MODEL</code></td>
+              <td><code>claude-opus-4</code></td>
+              <td>Model to use</td>
             </tr>
             <tr>
-              <td><code>DEBUG</code></td>
-              <td>Enable debug output</td>
+              <td><code>MIMICODE_THINKING</code></td>
+              <td><code>medium</code></td>
+              <td>Thinking budget: <code>off</code> / <code>low</code> / <code>medium</code> / <code>high</code></td>
+            </tr>
+            <tr>
+              <td><code>MIMICODE_CONFIRM</code></td>
+              <td><code>0</code></td>
+              <td>Set to <code>1</code> to confirm before each write, edit, or bash</td>
+            </tr>
+            <tr>
+              <td><code>MIMICODE_CHECKPOINT</code></td>
               <td><code>1</code></td>
+              <td>Set to <code>0</code> to disable undo snapshots</td>
+            </tr>
+            <tr>
+              <td><code>MIMICODE_MAX_STEPS</code></td>
+              <td><code>25</code></td>
+              <td>Max tool calls per turn</td>
             </tr>
           </tbody>
         </table>
 
-        <h3>Verify Installation</h3>
-        <pre><code>python3 check_deps.py</code></pre>
-        <p>This checks that all required dependencies are installed and accessible.</p>
+        <h3>Key management</h3>
+        <p>Use the <code>key</code> subcommand to store your API key securely so you do not need to export it in every shell session:</p>
+        <pre><code>mimicode key set sk-ant-...   # store
+mimicode key show             # display stored key
+mimicode key delete           # remove stored key</code></pre>
       </section>
 
       <!-- CLI Commands -->
       <section class="doc-section" id="cli">
         <h2>CLI Commands</h2>
 
-        <h3>Interactive Mode (REPL)</h3>
-        <pre><code>mimicode</code></pre>
-        <p>Start an interactive session. Type your task or question at the prompt.</p>
+        <h3>Watch mode (default)</h3>
+        <pre><code>mimicode watch</code></pre>
+        <p>Watches <code>code.mimi</code> in the current directory. This is the primary interface. Running <code>mimicode</code> with no arguments also starts watch mode.</p>
 
-        <h3>Single Command</h3>
-        <pre><code>mimicode "read src/main.py and explain"</code></pre>
-        <p>Execute a single task and exit. Perfect for scripts and automation.</p>
+        <h3>One-shot</h3>
+        <pre><code>mimicode "add error handling to auth.go"</code></pre>
+        <p>Execute a single task and exit. The response is printed to stdout.</p>
 
-        <h3>Named Session</h3>
-        <pre><code>mimicode -s myproject "add error handling to auth.py"</code></pre>
+        <h3>REPL</h3>
+        <pre><code>mimicode --repl
+mimicode --repl -s myproject</code></pre>
+        <p>Interactive prompt. Type tasks line by line. Use <code>:q</code> or Ctrl-D to exit.</p>
+
+        <h3>TUI</h3>
+        <pre><code>mimicode --tui</code></pre>
+        <p>Full terminal UI built with Bubbletea, with rich formatting and session navigation.</p>
+
+        <h3>Named session</h3>
+        <pre><code>mimicode -s auth-refactor "add rate limiting"</code></pre>
         <p>Create or resume a named session. Sessions persist across runs.</p>
 
-        <h3>Resume Session</h3>
-        <pre><code>mimicode -s myproject</code></pre>
-        <p>Continue a previous session in REPL mode.</p>
+        <h3>Confirm mode</h3>
+        <pre><code>mimicode --confirm "refactor calc.go"</code></pre>
+        <p>Gates every bash, write, and edit call. Read-only tools never prompt.</p>
 
-        <h3>TUI Mode</h3>
-        <pre><code>mimicode --tui</code></pre>
-        <p>Full-featured terminal UI with rich formatting and navigation.</p>
-
-        <h3>List Sessions</h3>
-        <pre><code>mimicode --list-sessions</code></pre>
-        <p>Show all saved sessions.</p>
-
-        <h3>Get Help</h3>
-        <pre><code>mimicode --help</code></pre>
-        <p>Display all available options.</p>
+        <h3>Version</h3>
+        <pre><code>mimicode --version</code></pre>
       </section>
 
       <!-- Modes -->
       <section class="doc-section" id="modes">
-        <h2>Usage Modes</h2>
+        <h2>Modes</h2>
 
-        <h3>REPL Mode</h3>
-        <p>Interactive prompt where you can refine tasks step-by-step:</p>
-        <pre><code>> read src/app.py
-> now add a function to handle errors
-> create a test file for that
-> done</code></pre>
+        <h3>Watch mode</h3>
+        <p>The primary way to use mimicode. Open <code>code.mimi</code> in your editor alongside your code. Write a question or task, save, and the answer appears in the same file below a divider. No context switching.</p>
+        <pre><code>mimicode watch</code></pre>
 
-        <h3>One-Shot Mode</h3>
-        <p>Execute a single task with complete output:</p>
-        <pre><code>mimicode "fix the TypeError in line 42 of utils.py"</code></pre>
+        <h3>REPL mode</h3>
+        <p>An interactive prompt for multi-turn sessions at the terminal. Supports inline REPL commands:</p>
+        <pre><code>> read src/app.go and explain the handler
+> add a middleware for request logging
+> :undo          # revert last turn
+> :compact       # compact long context
+> :q             # exit</code></pre>
 
-        <h3>TUI Mode</h3>
-        <p>Full terminal UI with syntax highlighting, session history, and navigation.</p>
+        <h3>One-shot mode</h3>
+        <p>Pass a task as an argument. Useful for scripts and CI pipelines:</p>
+        <pre><code>mimicode "run the tests and fix any failures"</code></pre>
 
-        <h3>Piped Input</h3>
-        <p>Chain mimicode with other commands:</p>
-        <pre><code>echo "read README.md" | mimicode</code></pre>
+        <h3>TUI mode</h3>
+        <p>Full terminal UI with syntax-highlighted output, session history, and keyboard navigation.</p>
+        <pre><code>mimicode --tui</code></pre>
       </section>
 
       <!-- Sessions -->
       <section class="doc-section" id="sessions">
-        <h2>Session Management</h2>
+        <h2>Sessions</h2>
 
-        <p>Sessions automatically save your conversation, allowing you to resume work later.</p>
+        <p>Every session is persisted on disk. Nothing is opaque.</p>
 
-        <h3>Session Files</h3>
-        <p>Sessions are stored in the <code>sessions/</code> directory:</p>
-        <ul>
-          <li><code>sessions/&lt;id&gt;.jsonl</code> — Event stream (metadata)</li>
-          <li><code>sessions/&lt;id&gt;.messages.json</code> — Full conversation</li>
-        </ul>
+        <h3>Session files</h3>
+        <pre><code>~/.mimi/sessions/&lt;id&gt;/
+  events.jsonl      # every tool call, model text, token counts, timing
+  messages.json     # full conversation for resume
 
-        <h3>Create a Named Session</h3>
-        <pre><code>mimicode -s auth-refactor</code></pre>
+&lt;project&gt;/.mimi/
+  MEMORY.md         # cross-session notes written by memory_write
+  RULES.md          # behavioral rules learned from recovery</code></pre>
 
-        <h3>Resume a Session</h3>
-        <pre><code>mimicode -s auth-refactor</code></pre>
+        <h3>Named sessions</h3>
+        <pre><code>mimicode -s auth-refactor          # start or resume
+mimicode --repl -s auth-refactor   # in REPL mode</code></pre>
 
-        <h3>List All Sessions</h3>
-        <pre><code>mimicode --list-sessions</code></pre>
+        <h3>Undo</h3>
+        <p>Every turn that changes files is snapshotted. Your real <code>.git</code> is never touched.</p>
+        <pre><code>:undo            # revert last turn
+:undo 3          # revert last 3 turns
+:undo list       # show all checkpoints</code></pre>
+        <p>Disable snapshots with <code>MIMICODE_CHECKPOINT=0</code>.</p>
 
-        <h3>Delete a Session</h3>
-        <pre><code>rm sessions/auth-refactor.*</code></pre>
+        <h3>Compaction</h3>
+        <p>For long sessions, compaction summarises earlier turns to keep context lean:</p>
+        <pre><code>:compact         # compact now
+:compact on      # enable auto-compaction
+:compact off     # disable auto-compaction
+:compact status  # show current status</code></pre>
       </section>
 
-      <!-- Philosophy -->
-      <section class="doc-section" id="philosophy">
-        <h2>Philosophy: Deliberate Over Broad</h2>
+      <!-- Tools -->
+      <section class="doc-section" id="tools">
+        <h2>Tools</h2>
 
-        <p>mimicode is built on the principle that <strong>less context is better</strong>. Instead of loading your entire codebase and asking the model to figure out what matters, mimicode:</p>
+        <p>mimicode has ten tools. That is the entire surface area.</p>
 
-        <ul>
-          <li><strong>Requires ripgrep</strong> — Fast, focused searches that respect <code>.gitignore</code></li>
-          <li><strong>Reads before editing</strong> — Understands context before making changes</li>
-          <li><strong>Scopes narrowly</strong> — Operates on specific files, not entire directories</li>
-          <li><strong>Bans broad operations</strong> — No <code>find</code>, no <code>grep -r</code>, no <code>ls -R</code></li>
-          <li><strong>Caps tool output</strong> — 100KB limit forces focused, efficient searches</li>
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>What it does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>bash</code></td>
+              <td>Runs a shell command. Blocked dangerous patterns (rm -rf /, curl | sh, etc.).</td>
+            </tr>
+            <tr>
+              <td><code>read</code></td>
+              <td>Reads a file with line numbers. Output capped at 100KB.</td>
+            </tr>
+            <tr>
+              <td><code>write</code></td>
+              <td>Creates or overwrites a file.</td>
+            </tr>
+            <tr>
+              <td><code>edit</code></td>
+              <td>Exact find-and-replace edits applied atomically. Fails if the old text is not unique.</td>
+            </tr>
+            <tr>
+              <td><code>web_search</code></td>
+              <td>DuckDuckGo search. Supports <code>site:</code> filters.</td>
+            </tr>
+            <tr>
+              <td><code>web_fetch</code></td>
+              <td>Fetches a URL. Has dedicated extractors for GitHub, Reddit, HN, and Stack Overflow.</td>
+            </tr>
+            <tr>
+              <td><code>stackoverflow_search</code></td>
+              <td>Returns Stack Overflow questions with top answers inline.</td>
+            </tr>
+            <tr>
+              <td><code>memory_write</code></td>
+              <td>Appends a structured note to <code>.mimi/MEMORY.md</code>.</td>
+            </tr>
+            <tr>
+              <td><code>memory_search</code></td>
+              <td>Full-text search across sessions, memory, and rules on disk.</td>
+            </tr>
+            <tr>
+              <td><code>recall_compaction</code></td>
+              <td>Loads a prior session summary by ID.</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <p>This approach reduces token waste, speeds up execution, and keeps costs low.</p>
+        <div class="warning-box">
+          <strong>Safety:</strong> <code>bash</code> blocks: <code>rm -rf /</code>, <code>curl | sh</code>, <code>grep -r</code>, <code>find</code>, <code>ls -R</code>, and other broad destructive patterns.
+          Use <code>--confirm</code> to gate every mutating call interactively.
+        </div>
       </section>
 
       <!-- Architecture -->
       <section class="doc-section" id="architecture">
         <h2>Architecture</h2>
 
-        <h3>Core Components</h3>
+        <p>44 Go files across 13 packages. Readable in one sitting.</p>
+
+        <h3>Package layout</h3>
         <table>
           <thead>
             <tr>
-              <th>Module</th>
+              <th>Package</th>
               <th>Purpose</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>agent.py</code></td>
-              <td>Main loop, CLI entry point, task orchestration</td>
+              <td><code>cmd/mimicode/</code></td>
+              <td>Entry points: watch, tui, key subcommands and REPL/one-shot runners</td>
             </tr>
             <tr>
-              <td><code>tools.py</code></td>
-              <td>Tool implementations with safety checks</td>
+              <td><code>internal/agent/</code></td>
+              <td>Turn loop, tool dispatch, stuck detection</td>
             </tr>
             <tr>
-              <td><code>providers.py</code></td>
-              <td>Claude API wrapper with prompt caching</td>
+              <td><code>internal/provider/</code></td>
+              <td>Anthropic API calls and streaming</td>
             </tr>
             <tr>
-              <td><code>tools_session.py</code></td>
-              <td>Session-aware tool wrappers</td>
+              <td><code>internal/tools/</code></td>
+              <td>bash, read, write, edit, web, git source implementations</td>
             </tr>
             <tr>
-              <td><code>logger.py</code></td>
-              <td>JSONL session logging and event tracking</td>
+              <td><code>internal/tui/</code></td>
+              <td>Bubbletea terminal UI</td>
             </tr>
             <tr>
-              <td><code>mimi_memory.py</code></td>
-              <td>Memory and embedding-based retrieval</td>
+              <td><code>internal/watch/</code></td>
+              <td>Notebook file watcher and diff engine</td>
             </tr>
             <tr>
-              <td><code>tui.py</code></td>
-              <td>Terminal UI (Textual framework)</td>
+              <td><code>internal/store/</code></td>
+              <td>Session persistence via SQLite</td>
+            </tr>
+            <tr>
+              <td><code>internal/memory/</code></td>
+              <td>Cross-session memory and full-text search</td>
+            </tr>
+            <tr>
+              <td><code>internal/reflect/</code></td>
+              <td>Post-session summarisation</td>
+            </tr>
+            <tr>
+              <td><code>internal/recovery/</code></td>
+              <td>Stuck diagnosis: reads the event log and proposes a fix</td>
+            </tr>
+            <tr>
+              <td><code>internal/checkpoint/</code></td>
+              <td>Shadow-git undo snapshots</td>
+            </tr>
+            <tr>
+              <td><code>internal/compactor/</code></td>
+              <td>Long-session compaction</td>
+            </tr>
+            <tr>
+              <td><code>internal/repomap/</code></td>
+              <td>Symbol index for the current project</td>
+            </tr>
+            <tr>
+              <td><code>internal/gitsource/</code></td>
+              <td>Shallow-clone a library for inspection</td>
             </tr>
           </tbody>
         </table>
 
-        <h3>Data Flow</h3>
-        <pre><code>User Input
-    ↓
-CLI Parser (agent.py)
-    ↓
-Session Manager (tools_session.py)
-    ↓
-Tool Executor (tools.py)
-    ↓
-Claude API (providers.py)
-    ↓
-Logger (logger.py)
-    ↓
-User Output</code></pre>
+        <h3>Turn flow</h3>
+        <pre><code>User input (file diff / REPL / one-shot)
+    |
+    v
+agent.AgentTurn          -- builds messages, calls API
+    |
+    v
+provider (streaming)     -- Anthropic API, token tracking
+    |
+    v
+tool dispatch            -- executes tool calls, appends results
+    |
+    v
+stuck / recovery check   -- detects loops and error runs
+    |
+    v
+store.SaveMessages       -- persists to SQLite + messages.json
+    |
+    v
+compactor.MaybeCompact   -- trims context if over threshold
+    |
+    v
+checkpoint.Snapshot      -- shadow-git snapshot for undo
+    |
+    v
+reflect.RunReflect       -- post-session summarisation</code></pre>
       </section>
 
-      <!-- Tools -->
-      <section class="doc-section" id="tools">
-        <h2>Core Tools</h2>
+      <!-- Philosophy -->
+      <section class="doc-section" id="philosophy">
+        <h2>Philosophy</h2>
 
-        <p>mimicode provides four focused tools:</p>
+        <p>mimicode is not a pair programmer. It does not pick architectures, debate tradeoffs, or volunteer opinions. It is a tool in the Unix sense: a rubber duck that can search your repo, run commands, and make mechanical edits when you ask.</p>
 
-        <h3>1. Read</h3>
-        <p>Read file contents with smart truncation. Output capped at 100KB.</p>
-        <pre><code>read src/app.py
-read src/app.py --lines 1-50</code></pre>
+        <p>The notebook interface keeps you in your editor. The diff engine means mimi only ever sees what is new. Its own answers are never replayed as prompts. Every file touched and every command run lands in a <code>events.jsonl</code> file you can read, replay, or audit. Memory lives in flat markdown. No black boxes.</p>
 
-        <h3>2. Write</h3>
-        <p>Create or overwrite files. Requires reading first to verify intent.</p>
-        <pre><code>write path/to/file.py "file contents"</code></pre>
-
-        <h3>3. Edit</h3>
-        <p>Make targeted edits to existing files with precise line ranges.</p>
-        <pre><code>edit src/app.py 42:50 "new code here"</code></pre>
-
-        <h3>4. Bash</h3>
-        <p>Execute shell commands with safety guardrails. Blocks dangerous operations like <code>rm -rf /</code>.</p>
-        <pre><code>bash "npm test"
-bash "python -m pytest"</code></pre>
-
-        <div class="warning-box">
-          <strong>Safety:</strong> Certain commands are blocked: <code>rm -rf</code>, <code>curl | sh</code>, <code>grep -r</code>, <code>find</code>, <code>cat /etc/passwd</code>, etc.
-        </div>
-      </section>
-
-      <!-- API & Providers -->
-      <section class="doc-section" id="api">
-        <h2>API & Providers</h2>
-
-        <h3>Anthropic API</h3>
-        <p>mimicode uses the Anthropic API with Claude models. Set your API key:</p>
-        <pre><code>export ANTHROPIC_API_KEY="sk-ant-..."</code></pre>
-
-        <h3>Prompt Caching</h3>
-        <p>Automatic prompt caching reduces API costs by reusing cached context across requests. No configuration needed.</p>
-
-        <h3>Supported Models</h3>
-        <ul>
-          <li><code>claude-opus-4-1</code> — Most capable, higher cost</li>
-          <li><code>claude-sonnet-4-1</code> — Balanced performance and cost</li>
-          <li><code>claude-haiku-3-5</code> — Fast and cheap</li>
-        </ul>
-
-        <p>Set the model by editing <code>providers.py</code> or via environment variable:</p>
-        <pre><code>export ANTHROPIC_MODEL="claude-sonnet-4-1"</code></pre>
+        <p>The tool set is deliberately small. Ten tools with clear contracts beat a sprawling API that hides what the model is actually doing.</p>
       </section>
 
       <!-- FAQ -->
       <section class="doc-section" id="faq">
         <h2>Frequently Asked Questions</h2>
 
-        <h3>Q: What's the difference from other coding agents?</h3>
-        <p><strong>A:</strong> mimicode is built for efficiency. It uses 75% less context, costs 75% less to run, and completes tasks faster by being deliberate about what it reads and how it operates.</p>
+        <h3>Q: What changed from the Python version?</h3>
+        <p><strong>A:</strong> The entire codebase is now Go. Single prebuilt binary, no Python runtime, no pip, no virtual environment. Watch mode is the primary interface. Sessions are stored in SQLite. Undo, compaction, recovery, and the TUI are all new.</p>
 
         <h3>Q: Can I use this for production code?</h3>
-        <p><strong>A:</strong> Yes. mimicode respects your code review process — it suggests changes you review before committing. Always test thoroughly.</p>
+        <p><strong>A:</strong> Yes. Use <code>--confirm</code> to review every mutating action before it runs. Undo snapshots let you revert any turn without touching your real git history.</p>
 
         <h3>Q: Is my code sent to Anthropic?</h3>
-        <p><strong>A:</strong> Yes, code is sent to Anthropic's API for processing. Use only with code you're comfortable sharing. Don't include secrets or sensitive data.</p>
+        <p><strong>A:</strong> Yes. Code read by tools is included in API requests to Anthropic. Do not use mimicode with secrets or sensitive data you are not comfortable sending over the API.</p>
 
         <h3>Q: How do I update mimicode?</h3>
-        <p><strong>A:</strong> On macOS/Linux: <code>cd ~/.local/mimicode && git pull</code>. On Windows: Manual update in <code>%LOCALAPPDATA%\mimicode</code>.</p>
+        <p><strong>A:</strong> Re-run the install script. It downloads the latest release binary and replaces the existing one.</p>
+        <pre><code>curl -fsSL https://trymimicode.github.io/install.sh | bash</code></pre>
 
         <h3>Q: Can I use a different AI provider?</h3>
-        <p><strong>A:</strong> Currently only Anthropic is supported. OpenAI support is planned.</p>
+        <p><strong>A:</strong> Currently only Anthropic is supported.</p>
 
         <h3>Q: How do I contribute?</h3>
-        <p><strong>A:</strong> Submit issues and PRs to the <a href="https://github.com/alvinliju/mimicode">GitHub repository</a>.</p>
+        <p><strong>A:</strong> Submit issues and PRs to <a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go</a>.</p>
       </section>
 
       <!-- Troubleshooting -->
       <section class="doc-section" id="troubleshooting">
         <h2>Troubleshooting</h2>
 
-        <h3>Installation Failed: "ripgrep not found"</h3>
-        <p>Install ripgrep manually:</p>
+        <h3>"ripgrep (rg) is required"</h3>
+        <p>Install ripgrep for your platform:</p>
         <pre><code># macOS
 brew install ripgrep
 
-# Ubuntu/Debian
+# Ubuntu / Debian
 sudo apt install ripgrep
 
 # Fedora
 sudo dnf install ripgrep
+
+# Windows (winget)
+winget install BurntSushi.ripgrep.MSVC
 
 # Windows (Chocolatey)
 choco install ripgrep
@@ -749,32 +812,28 @@ choco install ripgrep
 # Windows (Scoop)
 scoop install ripgrep</code></pre>
 
-        <h3>"ANTHROPIC_API_KEY not set"</h3>
-        <p>Set your API key:</p>
+        <h3>"ANTHROPIC_API_KEY is not set"</h3>
+        <p>Either export it in your shell:</p>
         <pre><code>export ANTHROPIC_API_KEY="your-key-here"</code></pre>
-        <p>Or on Windows:</p>
-        <pre><code>$env:ANTHROPIC_API_KEY = "your-key-here"</code></pre>
+        <p>Or store it permanently:</p>
+        <pre><code>mimicode key set your-key-here</code></pre>
 
-        <h3>"ModuleNotFoundError: No module named 'anthropic'"</h3>
-        <p>Reinstall dependencies:</p>
-        <pre><code>pip install --upgrade -r requirements.txt</code></pre>
-
-        <h3>"Command 'mimicode' not found"</h3>
-        <p>The PATH may not be updated. On Linux/macOS:</p>
-        <pre><code>source ~/.bashrc  # or ~/.zshrc</code></pre>
-        <p>Or add manually:</p>
+        <h3>"command 'mimicode' not found"</h3>
+        <p>The install directory is not in your PATH. On Linux / macOS:</p>
+        <pre><code>source ~/.bashrc   # or ~/.zshrc</code></pre>
+        <p>Or add it manually:</p>
         <pre><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
 
-        <h3>"rg: command not found" (during operation)</h3>
-        <p>ripgrep is required. Install it using the steps above.</p>
+        <h3>Watch mode not responding</h3>
+        <p>Make sure you are saving the file. mimicode reacts on save, not on keystroke. If the watcher exits unexpectedly, check for a stale <code>code.mimi.lock</code> file in your project directory and remove it.</p>
 
-        <h3>Sessions not saving</h3>
-        <p>Ensure the <code>sessions/</code> directory exists and is writable:</p>
-        <pre><code>mkdir -p ~/mimicode/sessions
-chmod 755 ~/mimicode/sessions</code></pre>
+        <h3>Agent stuck in a loop</h3>
+        <p>mimicode detects repeat patterns and error runs automatically. When triggered, it stops, reads its own event log, and proposes a fix. In REPL mode it asks before retrying. In one-shot mode it prints the diagnosis and exits.</p>
+        <p>You can also force a retry with context from the previous failure:</p>
+        <pre><code>mimicode --repl "your original task --force"</code></pre>
 
         <div class="info-box">
-          <strong>Still stuck?</strong> Open an issue on <a href="https://github.com/alvinliju/mimicode/issues">GitHub</a>.
+          <strong>Still stuck?</strong> Open an issue on <a href="https://github.com/trymimicode/mimicode-go/issues" target="_blank" rel="noopener">GitHub</a> with the relevant lines from <code>~/.mimi/sessions/&lt;id&gt;/events.jsonl</code>.
         </div>
       </section>
 
@@ -782,7 +841,7 @@ chmod 755 ~/mimicode/sessions</code></pre>
   </main>
 
   <script>
-    // ── Sidebar active link ──
+    // Sidebar active link
     const links = document.querySelectorAll('.sidebar-link');
     const sections = document.querySelectorAll('.doc-section');
 
@@ -807,7 +866,7 @@ chmod 755 ~/mimicode/sessions</code></pre>
     window.addEventListener('scroll', updateActiveLink);
     updateActiveLink();
 
-    // ── Sticky nav ──
+    // Sticky nav
     const hdr = document.querySelector('header');
     const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
     window.addEventListener('scroll', onScroll, { passive: true });
