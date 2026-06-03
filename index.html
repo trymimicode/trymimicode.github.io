@@ -3,8 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>mimicode &mdash; notebook-first AI coding tool</title>
+  <meta name="description" content="mimicode is a notebook-first AI coding tool for developers. Write a question in code.mimi, save the file, get the answer back in the same file. No chat window. No tab switching. Single Go binary with watch, REPL, TUI, and one-shot modes.">
+  <meta name="keywords" content="mimicode, AI coding tool, developer AI assistant, rubber duck debugger, terminal AI agent, notebook AI, code.mimi, Go binary AI, no chat window, file-based AI, agentic coding, Claude AI coding, AI pair programmer alternative">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="mimicode &mdash; notebook-first AI coding tool">
+  <meta property="og:description" content="Write a question in code.mimi, save the file, get the answer in the same file. No chat window. No tab switching. Single Go binary &mdash; watch, REPL, TUI, and one-shot modes.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/image.png">
+  <meta property="og:image:alt" content="mimicode terminal demo screenshot">
+  <meta property="og:image:width" content="3420">
+  <meta property="og:image:height" content="2214">
+
+  <!-- ── Twitter / X ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mimicode &mdash; notebook-first AI coding tool">
+  <meta name="twitter:description" content="Write questions in code.mimi, save, get answers in the same file. No chat window. Single Go binary.">
+  <meta name="twitter:image" content="https://mimicode.xyz/assets/image.png">
+  <meta name="twitter:image:alt" content="mimicode terminal demo screenshot">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <meta name="application-name" content="mimicode">
   <link rel="icon" type="image/png" href="assets/templogomimicode.png">
-  <title>mimicode</title>
+
+  <!-- ── Structured data (GEO / AI search) ── -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "mimicode",
+      "description": "A notebook-first AI coding tool. Write a question in code.mimi, save the file, and the answer appears below a divider in the same file. No chat window. No tab switching. Single prebuilt Go binary.",
+      "url": "https://mimicode.xyz",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": ["macOS", "Linux", "Windows"],
+      "programmingLanguage": "Go",
+      "codeRepository": "https://github.com/trymimicode/mimicode-go",
+      "downloadUrl": "https://mimicode.xyz/install.sh",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" },
+      "featureList": [
+        "Watch mode: write in code.mimi, save, answer appears in-file",
+        "REPL mode with :undo and session compaction",
+        "Terminal UI (TUI) with session history and keyboard navigation",
+        "One-shot mode for scripts and CI pipelines",
+        "Shadow-git undo: revert any turn without touching .git",
+        "Confirm mode gates bash, write, and edit calls",
+        "Full-text memory search across sessions, rules, and notes",
+        "Single prebuilt Go binary, no Python or Node runtime required"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "mimicode",
+      "url": "https://mimicode.xyz",
+      "description": "Notebook-first AI coding tool for developers.",
+      "publisher": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "mimicode is a notebook-first AI coding tool. You write questions or tasks in a file called code.mimi, save it, and the answer appears in the same file below a divider. No browser tab. No chat window. It runs as a single Go binary with no runtime dependencies." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I install mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "On macOS or Linux: curl -fsSL https://mimicode.xyz/install.sh | bash. On Windows: irm https://mimicode.xyz/install.ps1 | iex. Or via Go: go install github.com/trymimicode/mimicode-go/cmd/mimicode@latest" }
+        },
+        {
+          "@type": "Question",
+          "name": "Does mimicode require Python or Node?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. mimicode ships as a single prebuilt Go binary with zero runtime dependencies. No Python, no Node, no pip, no npm." }
+        },
+        {
+          "@type": "Question",
+          "name": "What AI model does mimicode use?",
+          "acceptedAnswer": { "@type": "Answer", "text": "mimicode uses Anthropic's Claude models. You need an ANTHROPIC_API_KEY to use it. The default model is claude-opus-4, configurable via the MIMICODE_MODEL environment variable." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I undo changes mimicode makes?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. mimicode takes a shadow-git snapshot before every turn that touches files. Use :undo in REPL mode to revert. Your real .git history is never touched." }
+        }
+      ]
+    }
+  ]
+  </script>
+
   <link rel="stylesheet" href="style.css">
   <style>
     body { align-items: center; }
@@ -424,7 +524,6 @@
     @media (max-width: 500px) {
       .hero-image { transform: scale(1.08); margin-bottom: 36px; }
       .stats-meta { margin-top: 22px; }
-      .nav-links { display: none; }
       .stats-strip { grid-template-columns: 1fr 1fr; }
       .mini-grid   { grid-template-columns: 1fr; }
     }
@@ -435,7 +534,12 @@
   <header>
     <nav>
       <a class="nav-logo" href="#">mimicode</a>
-      <ul class="nav-links">
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#philosophy">philosophy</a></li>
         <li><a href="#features">features</a></li>
         <li><a href="/docs/">docs</a></li>
@@ -674,6 +778,29 @@
     const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // ── Burger menu ──
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav')) closeMenu();
+    });
   </script>
 
 </body>

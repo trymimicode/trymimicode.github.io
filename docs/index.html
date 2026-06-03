@@ -3,8 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mimicode | Documentation</title>
+
+  <!-- ── Primary SEO ── -->
+  <title>mimicode Docs &mdash; Installation, CLI, Architecture &amp; Reference</title>
+  <meta name="description" content="Full documentation for mimicode: installation on macOS, Linux, and Windows; quick start guide; CLI commands; watch, REPL, TUI, and one-shot modes; session management; tools reference; architecture; FAQ; and troubleshooting.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/docs/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mimicode.xyz/docs/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="mimicode Docs &mdash; Installation, CLI &amp; Reference">
+  <meta property="og:description" content="Full documentation for mimicode. Install in one command, start watch mode, write in code.mimi. Covers CLI, modes, sessions, tools, architecture, and FAQ.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/image.png">
+  <meta property="og:image:alt" content="mimicode terminal demo screenshot">
+
+  <!-- ── Twitter / X ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mimicode Docs &mdash; Installation, CLI &amp; Reference">
+  <meta name="twitter:description" content="Full documentation for mimicode: install, quick start, CLI commands, modes, sessions, tools, and architecture.">
+  <meta name="twitter:image" content="https://mimicode.xyz/assets/image.png">
+  <meta name="twitter:image:alt" content="mimicode terminal demo screenshot">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
   <link rel="icon" type="image/png" href="../assets/templogomimicode.png">
+
+  <!-- ── Structured data (GEO / AI search) ── -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "name": "mimicode Documentation",
+      "headline": "mimicode Docs — Installation, CLI, Architecture & Reference",
+      "description": "Full documentation for mimicode: installation, quick start, CLI commands, watch mode, REPL mode, TUI mode, one-shot mode, sessions, undo, compaction, tools reference, architecture, philosophy, FAQ, and troubleshooting.",
+      "url": "https://mimicode.xyz/docs/",
+      "author": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" },
+      "publisher": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "mimicode",
+        "url": "https://mimicode.xyz",
+        "applicationCategory": "DeveloperApplication"
+      },
+      "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" },
+      "teaches": ["AI coding workflow", "watch mode", "REPL mode", "TUI mode", "shadow-git undo", "session management", "mimicode CLI"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What changed from the Python version of mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The entire codebase is now Go. Single prebuilt binary, no Python runtime, no pip, no virtual environment. Watch mode is the primary interface. Sessions are stored in SQLite. Undo, compaction, recovery, and the TUI are all new." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use mimicode for production code?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use --confirm to review every mutating action before it runs. Undo snapshots let you revert any turn without touching your real git history." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my code sent to Anthropic when using mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Code read by tools is included in API requests to Anthropic. Do not use mimicode with secrets or sensitive data you are not comfortable sending over the API." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I update mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Re-run the install script: curl -fsSL https://mimicode.xyz/install.sh | bash. It downloads the latest release binary and replaces the existing one." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I use the mimicode Terminal UI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Run mimicode --tui to open the full terminal UI built with Bubbletea. It provides rich syntax-highlighted output, session history, and keyboard navigation." }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to install and start mimicode",
+      "description": "Install mimicode and run your first AI coding session.",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Install", "text": "Run: curl -fsSL https://mimicode.xyz/install.sh | bash (macOS/Linux) or irm https://mimicode.xyz/install.ps1 | iex (Windows)." },
+        { "@type": "HowToStep", "position": 2, "name": "Set API key", "text": "Run: mimicode key set sk-ant-... to store your Anthropic API key." },
+        { "@type": "HowToStep", "position": 3, "name": "Start watch mode", "text": "Run: mimicode watch in your project directory. A file called code.mimi is created." },
+        { "@type": "HowToStep", "position": 4, "name": "Write and save", "text": "Open code.mimi in your editor, write a question or task, and save. The answer appears in the same file below a divider." }
+      ]
+    }
+  ]
+  </script>
+
   <link rel="stylesheet" href="../style.css">
   <style>
     /* ── Layout ── */
@@ -218,7 +312,12 @@
   <header>
     <nav>
       <a class="nav-logo" href="/">mimicode</a>
-      <ul class="nav-links">
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="/">home</a></li>
         <li><a href="/docs/" class="active">docs</a></li>
         <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
@@ -744,6 +843,29 @@ scoop install ripgrep</code></pre>
     const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // ── Burger menu ──
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav')) closeMenu();
+    });
   </script>
 
 </body>
