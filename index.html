@@ -37,6 +37,33 @@
       color: var(--text);
     }
 
+    @keyframes grad-flow {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .grad {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .grad::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #e8e8ed 0%, #a78bfa 25%, #60a5fa 55%, #34d399 80%, #e8e8ed 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: grad-flow 2.5s linear infinite;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    h1:hover .grad::after { opacity: 1; }
+
     .tagline,
     .sub-tagline { color: var(--muted); }
 
@@ -421,7 +448,7 @@
 
     <!-- ── Hero ── -->
     <div class="hero">
-      <h1>mimicode</h1>
+      <h1>mimi<span class="grad" data-text="code">code</span></h1>
 
       <p class="tagline">
         <strong>Code in a file, not a textbox.</strong>
@@ -494,19 +521,19 @@
     <div class="stats-strip">
       <div class="stat-cell">
         <div class="stat-number">0</div>
-        <div class="stat-label">chat tabs required<br>stay in your editor</div>
+        <div class="stat-label">context switches<br>your editor is the UI</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">4</div>
+        <div class="stat-label">ways to run<br>watch &middot; REPL &middot; TUI &middot; one-shot</div>
       </div>
       <div class="stat-cell">
         <div class="stat-number">1</div>
-        <div class="stat-label">notebook file per project<br><code>code.mimi</code> is the UI</div>
+        <div class="stat-label">binary, zero deps<br>no Python, no Node, no runtime</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">10</div>
-        <div class="stat-label">tools in one agent<br>bash, edit, web, memory…</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">turns logged locally<br><code>events.jsonl</code> audit trail</div>
+        <div class="stat-number">&infin;</div>
+        <div class="stat-label">turns undoable<br>shadow-git, never touches <code>.git</code></div>
       </div>
     </div>
 
@@ -541,15 +568,15 @@
         </div>
         <div class="mini-cell">
           <h3>Stuck recovery</h3>
-          <p>Repeats and error loops stop with a diagnosis. No silent retries..</p>
+          <p>Repeats and error loops stop with a diagnosis. No silent retries.</p>
         </div>
         <div class="mini-cell">
           <h3>FTS memory</h3>
           <p>Search <code>.mimi/MEMORY.md</code>, rules, and past sessions on disk.</p>
         </div>
         <div class="mini-cell">
-          <h3>Single Go binary</h3>
-          <p>Prebuilt install. No Python runtime. REPL and TUI when you want them.</p>
+          <h3>Terminal UI</h3>
+          <p><code>mimicode --tui</code>: rich output, session history, and keyboard navigation built with Bubbletea.</p>
         </div>
       </div>
     </div>
