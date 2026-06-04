@@ -16,3 +16,6 @@
 ## session-reflect: 796d6410a5cf — 2026-06-03T20:53:42Z
 Model implemented a multi-file navigation animation system (exit transitions in index.html, entrance animations in docs/index.html using sessionStorage) across turn 8, then user issued :undo in turn 9 to remove all changes. Verification showed code was syntactically correct but user explicitly rejected the implementation.
 
+## session-reflect: e445e2731950 — 2026-06-04T20:06:21Z
+User requested review of the landing page's policies links. Model explored the policies directory structure, made several failed command attempts (find, rg, Windows dir syntax) before successfully discovering the structure: three policy pages (privacy, terms, disclaimer) in separate directories under policies/.
+
