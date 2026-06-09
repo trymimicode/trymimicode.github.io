@@ -87,7 +87,9 @@ if (-not (Get-Command rg -ErrorAction SilentlyContinue)) {
 if (-not $env:ANTHROPIC_API_KEY) {
     Write-Host ""
     Write-Host "WARN ANTHROPIC_API_KEY not set." -ForegroundColor Yellow
-    Write-Host "     Get a key at https://console.anthropic.com/settings/keys then set it:"
+    Write-Host "     Get a key at https://console.anthropic.com/settings/keys then run:"
+    Write-Host "       mimicode key --set your-key-here"
+    Write-Host "     or set it in your environment:"
     Write-Host "       setx ANTHROPIC_API_KEY `"your-key-here`""
 }
 

@@ -123,7 +123,9 @@ fi
 if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
     echo ""
     echo "⚠️  ANTHROPIC_API_KEY not set."
-    echo "   Get a key at https://console.anthropic.com/settings/keys then add:"
+    echo "   Get a key at https://console.anthropic.com/settings/keys then run:"
+    echo "     $BINARY_NAME key --set your-key-here"
+    echo "   or set it in your shell:"
     echo "     export ANTHROPIC_API_KEY=\"your-key-here\""
 fi
 
