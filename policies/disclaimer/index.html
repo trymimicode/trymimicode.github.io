@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>Disclaimer &mdash; mimicode</title>
+  <meta name="description" content="mimicode's disclaimer. AI outputs may be inaccurate. The bash tool runs real shell commands. File edits are immediate. Use --confirm mode for sensitive work.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/policies/disclaimer/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/policies/disclaimer/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:title" content="Disclaimer &mdash; mimicode">
+  <meta property="og:description" content="AI outputs may be inaccurate. Shell commands run for real. File edits are immediate. Use --confirm mode.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" type="image/png" href="../../assets/templogomimicode.png">
+
+  <!-- ── Structured data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Disclaimer — mimicode",
+    "description": "mimicode's disclaimer covering AI output accuracy, file modifications, shell command execution, and liability.",
+    "url": "https://mimicode.xyz/policies/disclaimer/",
+    "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .policy-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .policy-header p {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .policy-body {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .policy-section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .policy-section p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul {
+      margin: 0 0 10px 0;
+      padding-left: 22px;
+    }
+
+    .policy-section li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+
+    .policy-section code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .policy-section a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+
+    .policy-section a:hover { color: var(--text); }
+
+    .caps {
+      font-size: 13px;
+      color: var(--subtle);
+      line-height: 1.7;
+    }
+
+    .warning-callout {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+    }
+
+    .warning-callout p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .warning-callout strong { color: #ef4444; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="policy-header">
+      <div class="eyebrow">Legal</div>
+      <h1>Disclaimer</h1>
+      <p>Effective June 4, 2026</p>
+    </div>
+
+    <div class="policy-body">
+
+      <div class="policy-section">
+        <h2>AI Output Accuracy</h2>
+        <p>mimicode uses large language models (LLMs) to generate responses. LLMs can produce output that is inaccurate, incomplete, outdated, or confidently wrong — a phenomenon commonly called hallucination. This includes but is not limited to:</p>
+        <ul>
+          <li>Incorrect code logic or syntax</li>
+          <li>Wrong library versions, deprecated APIs, or made-up function names</li>
+          <li>Flawed analysis or debugging conclusions</li>
+          <li>Explanations that sound authoritative but are factually incorrect</li>
+        </ul>
+        <p>Do not treat AI-generated output as authoritative. Always verify, test, and review independently before acting on it.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Code Quality and Security</h2>
+        <p>Code produced by the agent has not been reviewed, tested, or audited by us. It may:</p>
+        <ul>
+          <li>Contain bugs, logic errors, or performance issues</li>
+          <li>Introduce security vulnerabilities such as injection flaws, insecure defaults, or improper input handling</li>
+          <li>Fail to handle edge cases, errors, or concurrent access correctly</li>
+          <li>Be unsuitable for your specific environment, language version, or dependencies</li>
+        </ul>
+        <p>Always review and test AI-generated code thoroughly before deploying it to production or using it with sensitive data. mimicode is a tool to assist your judgment, not replace it.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>File Modifications Are Immediate</h2>
+        <p>When mimicode uses the <code>write</code> or <code>edit</code> tool, those changes are applied immediately to your filesystem. The shadow-git undo feature (<code>:undo</code> in REPL mode) can revert recent turns, but it is not a complete backup solution and may not be recoverable in all failure scenarios.</p>
+        <div class="warning-callout">
+          <p><strong>Important:</strong> Maintain independent backups of important files and repositories. Do not rely solely on mimicode's undo feature to protect critical work.</p>
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h2>Shell Command Execution</h2>
+        <p>The <code>bash</code> tool executes real shell commands on your machine with your user's permissions. Commands run by the agent can:</p>
+        <ul>
+          <li>Delete or overwrite files and directories</li>
+          <li>Modify system or application configuration</li>
+          <li>Install, update, or remove software</li>
+          <li>Make outbound network requests</li>
+          <li>Incur cloud or infrastructure costs</li>
+          <li>Start or stop running services</li>
+        </ul>
+        <p>Use <code>--confirm</code> mode (or set <code>MIMICODE_CONFIRM=1</code>) to require explicit approval before every <code>bash</code>, <code>write</code>, and <code>edit</code> call. Read-only tools never require confirmation.</p>
+        <div class="warning-callout">
+          <p><strong>For production or sensitive systems:</strong> always run with <code>--confirm</code> enabled and review every proposed action before approving it.</p>
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h2>API Costs</h2>
+        <p>Every task you run incurs API usage billed to your Anthropic account. Complex, multi-step tasks with many tool calls can consume substantial token budgets — particularly when using high-thinking-budget model settings.</p>
+        <p>We are not responsible for any API charges incurred through your use of mimicode. Monitor your usage in the <a href="https://console.anthropic.com" target="_blank" rel="noopener">Anthropic console</a>. You can limit spending by setting lower thinking budgets via the <code>MIMICODE_THINKING</code> environment variable or by capping <code>MIMICODE_MAX_STEPS</code>.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>No Professional Advice</h2>
+        <p>Nothing generated by mimicode constitutes legal, security, financial, medical, or other professional advice. Do not rely on AI output as a substitute for qualified professional expertise in regulated, safety-critical, or high-stakes domains.</p>
+        <p>AI-generated security analysis should never replace a professional penetration test or security audit. AI-generated legal analysis is not legal advice. AI-generated medical information is not medical advice.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Limitation of Liability</h2>
+        <p class="caps">TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, MIMICODE AND ITS AUTHORS EXPRESSLY DISCLAIM ALL LIABILITY FOR ANY DAMAGES ARISING FROM:</p>
+        <ul>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">Inaccurate, incomplete, or harmful AI-generated output</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">File or system modifications made by the agent</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">Shell commands executed by the agent</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">Data loss, corruption, or unintended deletion</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">Security vulnerabilities introduced by AI-generated code</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">API costs or billing disputes with Anthropic</li>
+          <li class="caps" style="font-size:13px;color:var(--subtle)">Any other direct, indirect, incidental, or consequential loss</li>
+        </ul>
+        <p class="caps">YOUR USE OF MIMICODE IS ENTIRELY AT YOUR OWN RISK.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Contact</h2>
+        <p>Questions or concerns? Open an issue or discussion at <a href="https://github.com/trymimicode/mimicode-go/issues" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go/issues</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>mimicode &copy; 2026</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/" class="active">disclaimer</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
+  </script>
+
+</body>
+</html>

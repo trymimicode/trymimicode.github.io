@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>Privacy Policy &mdash; mimicode</title>
+  <meta name="description" content="mimicode's privacy policy. The CLI tool runs entirely on your machine and collects no telemetry or user data. API keys are stored locally and sent directly to Anthropic.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/policies/privacy/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/policies/privacy/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:title" content="Privacy Policy &mdash; mimicode">
+  <meta property="og:description" content="mimicode runs entirely on your machine and collects no telemetry or user data.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" type="image/png" href="../../assets/templogomimicode.png">
+
+  <!-- ── Structured data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy — mimicode",
+    "description": "mimicode's privacy policy. The CLI tool runs locally and collects no user data.",
+    "url": "https://mimicode.xyz/policies/privacy/",
+    "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .policy-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .policy-header p {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .policy-body {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+    }
+
+    .policy-section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .policy-section p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul {
+      margin: 0 0 10px 0;
+      padding-left: 22px;
+    }
+
+    .policy-section li {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 4px;
+    }
+
+    .policy-section code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .policy-section a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+
+    .policy-section a:hover { color: var(--text); }
+
+    .callout {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+    }
+
+    .callout p { font-size: 13px; margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="policy-header">
+      <div class="eyebrow">Legal</div>
+      <h1>Privacy Policy</h1>
+      <p>Effective June 4, 2026</p>
+    </div>
+
+    <div class="policy-body">
+
+      <div class="policy-section">
+        <h2>Overview</h2>
+        <p>mimicode is a command-line tool that runs entirely on your machine. We do not operate servers that receive, store, or process your data. This policy explains what information exists, where it lives, and who can see it.</p>
+        <p>The short version: <strong style="color:var(--text)">mimicode collects nothing.</strong> Everything stays local unless you explicitly send it somewhere (like Anthropic's API).</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>The CLI Tool Collects Nothing</h2>
+        <p>mimicode does not include telemetry, crash reporting, analytics, feature-usage tracking, or any other form of data collection. No information about how you use the tool, what projects you work on, or what you ask the agent is ever sent to us.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Your Anthropic API Key</h2>
+        <p>You provide your own Anthropic API key. When stored with <code>mimicode key set</code>, it is saved locally on your machine. It is never transmitted to mimicode.xyz or any server we control.</p>
+        <p>When you run a task, your key is sent directly from your machine to Anthropic's API servers. We have no visibility into this exchange.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>What Anthropic Receives</h2>
+        <p>Every time the agent calls a model, your prompt text and conversation history are sent to Anthropic over their API. This may include:</p>
+        <ul>
+          <li>Your questions and task descriptions</li>
+          <li>File contents read by the <code>read</code> tool</li>
+          <li>Shell command output from the <code>bash</code> tool</li>
+          <li>Search results and web content fetched on your behalf</li>
+          <li>Memory notes from <code>.mimi/MEMORY.md</code> included as context</li>
+        </ul>
+        <p>This data is governed by <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>. Do not send secrets, credentials, or personal data you are not comfortable transmitting to a third-party AI provider.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Local Data Storage</h2>
+        <p>All session and memory data is stored on your own machine. None of it is transmitted by mimicode:</p>
+        <ul>
+          <li><code>~/.mimi/sessions/&lt;id&gt;/events.jsonl</code> — every tool call, model response, and token count</li>
+          <li><code>~/.mimi/sessions/&lt;id&gt;/messages.json</code> — full conversation for session resume</li>
+          <li><code>.mimi/MEMORY.md</code> — cross-session notes written by <code>memory_write</code> in your project</li>
+          <li><code>.mimi/RULES.md</code> — behavioral rules learned during recovery, in your project</li>
+        </ul>
+        <p>You can delete any of these files at any time without affecting the tool's operation.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>The mimicode.xyz Website</h2>
+        <p>The website is a static site hosted on GitHub Pages. We do not use cookies, analytics scripts, or third-party tracking pixels of any kind on this site.</p>
+        <p>GitHub may log standard web server information (IP address, browser user agent, referring URL) when you visit. This is governed by <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Children's Privacy</h2>
+        <p>mimicode is a developer tool not directed at children under 13. We do not knowingly collect information from children. If you believe a child has provided information through this site, contact us via GitHub so we can address it.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Changes to This Policy</h2>
+        <p>We may update this policy from time to time. When we do, the "Effective" date at the top of this page will change. Continued use of the software or website after an update constitutes acceptance of the revised policy.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>Contact</h2>
+        <p>Questions or concerns about this policy? Open an issue or discussion at <a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github.com/trymimicode/mimicode-go</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>mimicode &copy; 2026</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/" class="active">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
+  </script>
+
+</body>
+</html>

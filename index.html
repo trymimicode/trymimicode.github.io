@@ -3,95 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mimicode</title>
+
+  <!-- ── Primary SEO ── -->
+  <title>mimicode &mdash; notebook-first AI coding tool</title>
+  <meta name="description" content="mimicode is a notebook-first AI coding tool for developers. Write a question in code.mimi, save the file, get the answer back in the same file. No chat window. No tab switching. Single Go binary with watch, REPL, TUI, and one-shot modes.">
+  <meta name="keywords" content="mimicode, AI coding tool, developer AI assistant, rubber duck debugger, terminal AI agent, notebook AI, code.mimi, Go binary AI, no chat window, file-based AI, agentic coding, Claude AI coding, AI pair programmer alternative">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="mimicode &mdash; notebook-first AI coding tool">
+  <meta property="og:description" content="Write a question in code.mimi, save the file, get the answer in the same file. No chat window. No tab switching. Single Go binary &mdash; watch, REPL, TUI, and one-shot modes.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
+  <meta property="og:image:alt" content="mimicode terminal demo screenshot">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="420">
+
+  <!-- ── Twitter / X ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mimicode &mdash; notebook-first AI coding tool">
+  <meta name="twitter:description" content="Write questions in code.mimi, save, get answers in the same file. No chat window. Single Go binary.">
+  <meta name="twitter:image" content="https://mimicode.xyz/assets/embed.png">
+  <meta name="twitter:image:alt" content="mimicode terminal demo screenshot">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <meta name="application-name" content="mimicode">
+  <link rel="icon" type="image/png" href="assets/templogomimicode.png">
+
+  <!-- ── Structured data (GEO / AI search) ── -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "mimicode",
+      "description": "A notebook-first AI coding tool. Write a question in code.mimi, save the file, and the answer appears below a divider in the same file. No chat window. No tab switching. Single prebuilt Go binary.",
+      "url": "https://mimicode.xyz",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": ["macOS", "Linux", "Windows"],
+      "programmingLanguage": "Go",
+      "codeRepository": "https://github.com/trymimicode/mimicode-go",
+      "downloadUrl": "https://mimicode.xyz/install.sh",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" },
+      "featureList": [
+        "Watch mode: write in code.mimi, save, answer appears in-file",
+        "REPL mode with :undo and session compaction",
+        "Terminal UI (TUI) with session history and keyboard navigation",
+        "One-shot mode for scripts and CI pipelines",
+        "Shadow-git undo: revert any turn without touching .git",
+        "Confirm mode gates bash, write, and edit calls",
+        "Full-text memory search across sessions, rules, and notes",
+        "Single prebuilt Go binary, no Python or Node runtime required"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "mimicode",
+      "url": "https://mimicode.xyz",
+      "description": "Notebook-first AI coding tool for developers.",
+      "publisher": { "@type": "Organization", "name": "mimicode", "url": "https://mimicode.xyz" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "mimicode is a notebook-first AI coding tool. You write questions or tasks in a file called code.mimi, save it, and the answer appears in the same file below a divider. No browser tab. No chat window. It runs as a single Go binary with no runtime dependencies." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I install mimicode?",
+          "acceptedAnswer": { "@type": "Answer", "text": "On macOS or Linux: curl -fsSL https://mimicode.xyz/install.sh | bash. On Windows: irm https://mimicode.xyz/install.ps1 | iex. Or via Go: go install github.com/trymimicode/mimicode-go/cmd/mimicode@latest" }
+        },
+        {
+          "@type": "Question",
+          "name": "Does mimicode require Python or Node?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. mimicode ships as a single prebuilt Go binary with zero runtime dependencies. No Python, no Node, no pip, no npm." }
+        },
+        {
+          "@type": "Question",
+          "name": "What AI model does mimicode use?",
+          "acceptedAnswer": { "@type": "Answer", "text": "mimicode uses Anthropic's Claude models. You need an ANTHROPIC_API_KEY to use it. The default model is claude-opus-4, configurable via the MIMICODE_MODEL environment variable." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I undo changes mimicode makes?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. mimicode takes a shadow-git snapshot before every turn that touches files. Use :undo in REPL mode to revert. Your real .git history is never touched." }
+        }
+      ]
+    }
+  ]
+  </script>
+
+  <link rel="stylesheet" href="style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-
-    :root {
-      --bg: #0a0a0b;
-      --surface: #111113;
-      --surface2: #16161a;
-      --border: #1e1e22;
-      --border-hover: #2a2a30;
-      --text: #e8e8ed;
-      --muted: #909099;
-      --subtle: #5a5a6a;
-      --dim: #2e2e3a;
-      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
-      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-      background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* ── Nav ── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.25s, border-color 0.25s;
-    }
-
-    header.scrolled {
-      background: rgba(10, 10, 11, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom-color: var(--border);
-    }
-
-    nav {
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-    }
-
-    .nav-logo {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
+    body { align-items: center; }
 
     /* ── Main ── */
     main {
@@ -121,9 +137,38 @@
       color: var(--text);
     }
 
+    @keyframes grad-flow {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .grad {
+      position: relative;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .grad::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #e8e8ed 0%, #a78bfa 25%, #60a5fa 55%, #34d399 80%, #e8e8ed 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: grad-flow 2.5s linear infinite;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    h1:hover .grad::after { opacity: 1; }
+
+    .tagline,
+    .sub-tagline { color: var(--muted); }
+
     .tagline {
       font-size: clamp(15px, 2.2vw, 19px);
-      color: var(--muted);
       max-width: 520px;
       margin-bottom: 12px;
       line-height: 1.75;
@@ -133,14 +178,13 @@
 
     .sub-tagline {
       font-size: 13px;
-      color: var(--muted);
       max-width: 440px;
       margin-bottom: 44px;
       opacity: 0.65;
       line-height: 1.7;
     }
 
-    /* ── Install widget (desktop) ── */
+    /* ── Install widget ── */
     .install-wrap {
       display: flex;
       flex-direction: column;
@@ -222,8 +266,9 @@
       transition: background 0.1s, color 0.1s;
     }
 
-    .dropdown-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .dropdown-item:hover,
     .dropdown-item.active { color: var(--text); }
+    .dropdown-item:hover { background: rgba(255,255,255,0.04); }
 
     .command-display {
       display: flex;
@@ -264,8 +309,9 @@
       position: relative;
     }
 
-    .copy-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .copy-btn:hover,
     .copy-btn.copied { color: var(--text); }
+    .copy-btn:hover { background: rgba(255,255,255,0.05); }
 
     .tooltip {
       position: absolute;
@@ -311,13 +357,22 @@
       .guide-btn { display: flex; }
     }
 
+    /* ── Eyebrow labels ── */
+    .section-eyebrow,
+    .stats-meta { text-transform: uppercase; color: var(--subtle); }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
     .stats-meta {
-      margin-top: 78px;
-      margin-bottom: 10px;
-      color: var(--subtle);
       font-size: 12px;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
+      margin-top: 78px;
+      margin-bottom: 10px;
     }
 
     .hero-image {
@@ -330,18 +385,20 @@
       margin-bottom: 260px;
     }
 
-    /* ── Stats strip ── */
-    .stats-strip {
+    /* ── Grid strips ── */
+    .stats-strip,
+    .mini-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       width: 100%;
-      margin-top: 0;
+      background: var(--border);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      background: var(--border);
     }
+
+    .stats-strip { grid-template-columns: repeat(4, 1fr); }
+    .mini-grid   { grid-template-columns: repeat(3, 1fr); }
 
     .stat-cell {
       background: var(--surface);
@@ -359,35 +416,17 @@
       color: var(--text);
     }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--subtle);
-      line-height: 1.4;
-    }
+    .stat-label { font-size: 12px; color: var(--subtle); line-height: 1.4; }
 
-    .stat-label code {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text);
-    }
+    .stat-label code,
+    .mini-cell code { font-family: var(--font-mono); font-size: 11px; color: var(--text); }
 
-    /* ── Section eyebrow ── */
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--subtle);
-      margin-bottom: 24px;
-    }
+    /* ── Content sections ── */
+    .why-section,
+    .features-section,
+    .compare-section { width: 100%; margin-top: 80px; }
 
-    /* ── Why section ── */
-    .why-section {
-      width: 100%;
-      max-width: 820px;
-      margin-top: 80px;
-      align-self: flex-start;
-    }
+    .why-section { max-width: 820px; align-self: flex-start; }
 
     .why-body {
       font-size: 15px;
@@ -409,26 +448,7 @@
       padding: 1px 5px;
     }
 
-    /* ── Features grid (matches stats strip) ── */
-    .features-section {
-      width: 100%;
-      margin-top: 80px;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .mini-cell {
-      background: var(--surface);
-      padding: 22px 20px;
-    }
+    .mini-cell { background: var(--surface); padding: 22px 20px; }
 
     .mini-cell h3 {
       font-size: 13px;
@@ -438,28 +458,13 @@
       letter-spacing: -0.02em;
     }
 
-    .mini-cell p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .mini-cell code {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text);
-    }
+    .mini-cell p { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
     /* ── Comparison table ── */
-    .compare-section {
-      width: 100%;
-      margin-top: 80px;
-    }
+    .compare-header,
+    .compare-row { display: grid; grid-template-columns: 1fr 160px 160px; }
 
     .compare-header {
-      display: grid;
-      grid-template-columns: 1fr 160px 160px;
-      gap: 0;
       padding: 0 0 14px 0;
       border-bottom: 1px solid var(--border);
     }
@@ -475,9 +480,6 @@
     .compare-header .col-mimi { color: var(--text); }
 
     .compare-row {
-      display: grid;
-      grid-template-columns: 1fr 160px 160px;
-      gap: 0;
       padding: 18px 0;
       border-bottom: 1px solid var(--border);
       align-items: center;
@@ -485,63 +487,30 @@
 
     .compare-row:hover { background: rgba(255,255,255,0.01); }
 
-    .compare-metric {
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .compare-metric,
+    .compare-val { font-size: 13px; }
 
-    .compare-val {
-      font-size: 13px;
-      font-family: var(--font-mono);
-    }
+    .compare-metric { color: var(--muted); }
+    .compare-val    { font-family: var(--font-mono); }
 
     .compare-val.bad  { color: var(--muted); }
     .compare-val.good { color: var(--text);  }
 
-    /* ── Footer ── */
-    footer {
-      width: 100%;
-      max-width: 920px;
-      padding: 24px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    footer span { font-size: 12px; color: var(--muted); }
-
     /* ── Responsive ── */
     @media (max-width: 720px) {
-      .hero-image {
-        transform: scale(1.18);
-        margin-bottom: 110px;
-      }
-
-      .stats-meta {
-        margin-top: 36px;
-      }
-
+      .hero-image { transform: scale(1.18); margin-bottom: 110px; }
+      .stats-meta { margin-top: 36px; }
       .stats-strip { grid-template-columns: repeat(2, 1fr); }
-      .mini-grid { grid-template-columns: repeat(2, 1fr); }
-      .compare-header, .compare-row { grid-template-columns: 1fr 100px 100px; }
+      .mini-grid   { grid-template-columns: repeat(2, 1fr); }
+      .compare-header,
+      .compare-row { grid-template-columns: 1fr 100px 100px; }
     }
 
     @media (max-width: 500px) {
-      .hero-image {
-        transform: scale(1.08);
-        margin-bottom: 36px;
-      }
-
-      .stats-meta {
-        margin-top: 22px;
-      }
-
-      .nav-links { display: none; }
+      .hero-image { transform: scale(1.08); margin-bottom: 36px; }
+      .stats-meta { margin-top: 22px; }
       .stats-strip { grid-template-columns: 1fr 1fr; }
-      .mini-grid { grid-template-columns: 1fr; }
+      .mini-grid   { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -550,10 +519,15 @@
   <header>
     <nav>
       <a class="nav-logo" href="#">mimicode</a>
-      <ul class="nav-links">
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#philosophy">philosophy</a></li>
         <li><a href="#features">features</a></li>
-        <li><a href="/docs.html">docs</a></li>
+        <li><a href="/docs/">docs</a></li>
         <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
       </ul>
     </nav>
@@ -563,7 +537,7 @@
 
     <!-- ── Hero ── -->
     <div class="hero">
-      <h1>mimicode</h1>
+      <h1>mimi<span class="grad" data-text="code">code</span></h1>
 
       <p class="tagline">
         <strong>Code in a file, not a textbox.</strong>
@@ -615,7 +589,7 @@
           </div>
         </div>
 
-        <a class="guide-btn" href="/docs.html#quickstart">
+        <a class="guide-btn" href="/docs/#quickstart">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -636,19 +610,19 @@
     <div class="stats-strip">
       <div class="stat-cell">
         <div class="stat-number">0</div>
-        <div class="stat-label">chat tabs required<br>stay in your editor</div>
+        <div class="stat-label">context switches<br>your editor is the UI</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">4</div>
+        <div class="stat-label">ways to run<br>watch &middot; REPL &middot; TUI &middot; one-shot</div>
       </div>
       <div class="stat-cell">
         <div class="stat-number">1</div>
-        <div class="stat-label">notebook file per project<br><code>code.mimi</code> is the UI</div>
+        <div class="stat-label">binary, zero deps<br>no Python, no Node, no runtime</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">10</div>
-        <div class="stat-label">tools in one agent<br>bash, edit, web, memory…</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">turns logged locally<br><code>events.jsonl</code> audit trail</div>
+        <div class="stat-number">&infin;</div>
+        <div class="stat-label">turns undoable<br>shadow-git, never touches <code>.git</code></div>
       </div>
     </div>
 
@@ -683,15 +657,15 @@
         </div>
         <div class="mini-cell">
           <h3>Stuck recovery</h3>
-          <p>Repeats and error loops stop with a diagnosis. No silent retries..</p>
+          <p>Repeats and error loops stop with a diagnosis. No silent retries.</p>
         </div>
         <div class="mini-cell">
           <h3>FTS memory</h3>
           <p>Search <code>.mimi/MEMORY.md</code>, rules, and past sessions on disk.</p>
         </div>
         <div class="mini-cell">
-          <h3>Single Go binary</h3>
-          <p>Prebuilt install. No Python runtime. REPL and TUI when you want them.</p>
+          <h3>Terminal UI</h3>
+          <p><code>mimicode --tui</code>: rich output, session history, and keyboard navigation built with Bubbletea.</p>
         </div>
       </div>
     </div>
@@ -736,7 +710,11 @@
 
   <footer>
     <span>mimicode &copy; 2026</span>
-    <span>notebook-first &middot; auditable &middot; Go</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
   </footer>
 
   <script>
@@ -789,6 +767,29 @@
     const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // ── Burger menu ──
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav')) closeMenu();
+    });
   </script>
 
 </body>
