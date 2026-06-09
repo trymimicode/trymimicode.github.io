@@ -1,1 +1,1 @@
-# trymimicode.github.io
+# mimicode.xyz
