@@ -6,7 +6,7 @@
 
   <!-- ── Primary SEO ── -->
   <title>Languages &mdash; mimicode</title>
-  <meta name="description" content="Programming languages supported by mimicode.">
+  <meta name="description" content="Language packs for mimicode. Install rules and agent instructions for your stack with a single command.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="mimicode">
   <link rel="canonical" href="https://mimicode.xyz/languages/">
@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://mimicode.xyz/languages/">
   <meta property="og:site_name" content="mimicode">
   <meta property="og:title" content="Languages &mdash; mimicode">
-  <meta property="og:description" content="Programming languages supported by mimicode.">
+  <meta property="og:description" content="Language packs for mimicode. Install rules and agent instructions for your stack with a single command.">
   <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
 
   <!-- ── App / Browser ── -->
@@ -27,9 +27,9 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": "CollectionPage",
     "name": "Languages — mimicode",
-    "description": "Programming languages supported by mimicode.",
+    "description": "Language packs for mimicode.",
     "url": "https://mimicode.xyz/languages/",
     "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
   }
@@ -43,6 +43,98 @@
       max-width: 720px;
       margin: 0 auto;
       padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .page-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .page-header p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lang-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .lang-item:first-child { border-top: 1px solid var(--border); }
+
+    .lang-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .lang-item h2 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      transition: color 0.15s;
+    }
+
+    .lang-item:hover h2 { opacity: 0.8; }
+
+    .lang-arrow {
+      font-size: 16px;
+      color: var(--subtle);
+      transition: transform 0.2s, color 0.15s;
+      flex-shrink: 0;
+    }
+
+    .lang-item:hover .lang-arrow {
+      transform: translateX(4px);
+      color: var(--muted);
+    }
+
+    .lang-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .lang-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -66,6 +158,24 @@
   </header>
 
   <main>
+    <div class="page-header">
+      <div class="eyebrow">Language Packs</div>
+      <h1>Languages</h1>
+      <p>Rules and agent instructions for your stack. Install any pack with <code style="font-family:var(--font-mono);font-size:13px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 6px">mimicode install &lt;language&gt;</code>.</p>
+    </div>
+
+    <nav class="lang-list" aria-label="Language packs">
+
+      <a class="lang-item" href="/languages/html/">
+        <div class="lang-item-header">
+          <h2>html</h2>
+          <span class="lang-arrow" aria-hidden="true">&#8594;</span>
+        </div>
+        <p>Semantic HTML5 conventions, boilerplate rules, attribute ordering, accessibility requirements, and agent instructions for writing and editing HTML files.</p>
+        <div class="lang-tag">RULES.md &middot; AGENTS.md</div>
+      </a>
+
+    </nav>
   </main>
 
   <footer>

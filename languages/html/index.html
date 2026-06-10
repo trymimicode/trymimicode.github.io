@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── Primary SEO ── -->
+  <title>html language pack &mdash; mimicode</title>
+  <meta name="description" content="HTML language pack for mimicode. Semantic HTML5 rules, boilerplate conventions, and agent instructions.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="mimicode">
+  <link rel="canonical" href="https://mimicode.xyz/languages/html/">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimicode.xyz/languages/html/">
+  <meta property="og:site_name" content="mimicode">
+  <meta property="og:title" content="html language pack &mdash; mimicode">
+  <meta property="og:description" content="HTML language pack for mimicode. Semantic HTML5 rules, boilerplate conventions, and agent instructions.">
+  <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
+
+  <!-- ── App / Browser ── -->
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" type="image/png" href="../../assets/templogomimicode.png">
+
+  <!-- ── Structured data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "html language pack — mimicode",
+    "description": "HTML language pack for mimicode.",
+    "url": "https://mimicode.xyz/languages/html/",
+    "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
+  }
+  </script>
+
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 24px 120px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .pack-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pack-header h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .pack-header p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Dropdowns ── */
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    details {
+      border-bottom: 1px solid var(--border);
+    }
+
+    details:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .summary-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .summary-name {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .summary-desc {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .summary-chevron {
+      font-size: 13px;
+      color: var(--subtle);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    details[open] .summary-chevron { transform: rotate(90deg); }
+
+    .file-content {
+      padding-bottom: 24px;
+    }
+
+    .file-content pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 22px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.75;
+      color: var(--muted);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Install block ── */
+    .install-block {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+    }
+
+    .install-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .install-cmd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+
+    .install-cmd code {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--subtle);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      padding: 5px 12px;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-logo" href="/">mimicode</a>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">home</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/languages/" class="active">langs</a></li>
+        <li><a href="https://github.com/trymimicode/mimicode-go" target="_blank" rel="noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="pack-header">
+      <div class="eyebrow">Language Pack</div>
+      <h1>html</h1>
+      <p>Semantic HTML5 conventions, attribute rules, accessibility requirements, and agent instructions.</p>
+    </div>
+
+    <div class="file-list">
+
+      <details>
+        <summary>
+          <div class="summary-left">
+            <span class="summary-name">RULES.md</span>
+            <span class="summary-desc">Coding conventions and standards</span>
+          </div>
+          <span class="summary-chevron" aria-hidden="true">&#8250;</span>
+        </summary>
+        <div class="file-content">
+          <pre># HTML Rules &amp; Conventions
+
+The standard this codebase writes HTML to. Conventional, readable, and semantic HTML5.
+
+---
+
+## Boilerplate
+
+Every standalone HTML file starts exactly like this:
+
+```html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+
+- `&lt;!DOCTYPE html&gt;` is always the very first line. Nothing before it.
+- `lang` attribute is always present on `&lt;html&gt;`. Match the primary language of the content.
+- `&lt;meta charset&gt;` is always the first element inside `&lt;head&gt;`.
+
+---
+
+## Indentation &amp; Formatting
+
+- 2 spaces per indent level. No tabs.
+- Each child element is indented one level deeper than its parent.
+- Inline elements (`&lt;a&gt;`, `&lt;span&gt;`, `&lt;strong&gt;`, `&lt;em&gt;`) that contain only a short text node stay on one line.
+- Block elements always get their own line.
+- Leave one blank line between logically distinct sections at the top level of `&lt;body&gt;`. Not between every element — only between major blocks.
+
+```html
+&lt;!-- Correct --&gt;
+&lt;header&gt;
+  &lt;nav&gt;
+    &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+    &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;h1&gt;Welcome&lt;/h1&gt;
+  &lt;p&gt;Content goes here.&lt;/p&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2026&lt;/p&gt;
+&lt;/footer&gt;
+```
+
+---
+
+## Letter Case
+
+- All element names are lowercase: `&lt;div&gt;`, `&lt;section&gt;`, `&lt;input&gt;`.
+- All attribute names are lowercase: `class`, `href`, `data-value`.
+- Attribute values follow their natural case (URLs, IDs, class names as defined).
+
+---
+
+## Attributes
+
+**Quoting:** Always double quotes. Never single quotes. Never unquoted.
+
+```html
+&lt;!-- Correct --&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+
+&lt;!-- Wrong --&gt;
+&lt;input type=&#x27;text&#x27; name=username&gt;
+```
+
+**Ordering:** `id` → `class` → `type` → `name` → `value` → `href` or `src` → everything else.
+
+```html
+&lt;input id=&quot;email&quot; class=&quot;field&quot; type=&quot;email&quot; name=&quot;email&quot; required&gt;
+&lt;a id=&quot;logo&quot; class=&quot;brand-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt;
+&lt;img id=&quot;hero&quot; class=&quot;hero-image&quot; src=&quot;hero.jpg&quot; alt=&quot;A mountain at sunrise&quot;&gt;
+```
+
+**Boolean attributes:** Name only. No value.
+
+```html
+&lt;!-- Correct --&gt;
+&lt;input type=&quot;checkbox&quot; checked&gt;
+&lt;button disabled&gt;Submit&lt;/button&gt;
+
+&lt;!-- Wrong --&gt;
+&lt;input type=&quot;checkbox&quot; checked=&quot;true&quot;&gt;
+&lt;button disabled=&quot;disabled&quot;&gt;Submit&lt;/button&gt;
+```
+
+---
+
+## Semantic Elements
+
+Use the element that matches the meaning of the content:
+
+| Purpose | Element |
+|---|---|
+| Main page header / site header | `&lt;header&gt;` |
+| Primary navigation | `&lt;nav&gt;` |
+| Main content area (one per page) | `&lt;main&gt;` |
+| Self-contained content (blog post, card) | `&lt;article&gt;` |
+| Thematic grouping with a heading | `&lt;section&gt;` |
+| Tangentially related content | `&lt;aside&gt;` |
+| Page footer | `&lt;footer&gt;` |
+| Important text | `&lt;strong&gt;` |
+| Emphasized text | `&lt;em&gt;` |
+| Generic container (no meaning) | `&lt;div&gt;` |
+| Generic inline container | `&lt;span&gt;` |
+
+`&lt;div&gt;` and `&lt;span&gt;` are not wrong — they are correct when there is no semantic alternative. Do not force semantics where they do not apply.
+
+---
+
+## Headings
+
+- One `&lt;h1&gt;` per page. It describes the page&#x27;s main topic.
+- Heading levels do not skip: `&lt;h1&gt;` → `&lt;h2&gt;` → `&lt;h3&gt;`. Never jump from `&lt;h1&gt;` to `&lt;h3&gt;`.
+- Do not use headings to make text large or bold. That is a CSS job.
+
+---
+
+## Links
+
+- `href` always has a value. An empty `href=&quot;&quot;` is not a button — use `&lt;button&gt;`.
+- Descriptive link text. Not &quot;click here&quot;. Not &quot;read more&quot; alone.
+- External links that open in a new tab must include `rel=&quot;noopener noreferrer&quot;`.
+
+```html
+&lt;a href=&quot;https://example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Example Site&lt;/a&gt;
+```
+
+---
+
+## Images
+
+- `alt` is always present.
+- Decorative images that carry no information: `alt=&quot;&quot;`.
+- All other images: a concise, accurate description of what the image shows.
+- `width` and `height` attributes should be set to the image&#x27;s natural dimensions to prevent layout shift.
+
+```html
+&lt;img src=&quot;logo.png&quot; alt=&quot;Acme Inc. logo&quot; width=&quot;200&quot; height=&quot;60&quot;&gt;
+&lt;img src=&quot;divider.png&quot; alt=&quot;&quot; width=&quot;800&quot; height=&quot;2&quot;&gt;
+```
+
+---
+
+## Forms
+
+- Every `&lt;input&gt;`, `&lt;select&gt;`, and `&lt;textarea&gt;` is associated with a `&lt;label&gt;`.
+- Prefer explicit association (`for` / `id`) over wrapping.
+- `&lt;button type=&quot;submit&quot;&gt;` for form submission. `&lt;button type=&quot;button&quot;&gt;` for everything else.
+- Group related fields inside `&lt;fieldset&gt;` with a `&lt;legend&gt;`.
+
+```html
+&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
+  &lt;label for=&quot;username&quot;&gt;Username&lt;/label&gt;
+  &lt;input id=&quot;username&quot; type=&quot;text&quot; name=&quot;username&quot; required&gt;
+
+  &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+  &lt;input id=&quot;password&quot; type=&quot;password&quot; name=&quot;password&quot; required&gt;
+
+  &lt;button type=&quot;submit&quot;&gt;Log in&lt;/button&gt;
+&lt;/form&gt;
+```
+
+---
+
+## Scripts &amp; Styles
+
+- `&lt;link rel=&quot;stylesheet&quot;&gt;` goes in `&lt;head&gt;`.
+- `&lt;script&gt;` goes at the end of `&lt;body&gt;`, just before `&lt;/body&gt;`, unless `defer` or `async` is used — in that case it may go in `&lt;head&gt;`.
+- No `type=&quot;text/css&quot;` on `&lt;link&gt;`. No `type=&quot;text/javascript&quot;` on `&lt;script&gt;`. Both are the default.
+- No inline `style=&quot;&quot;` attributes.
+- No inline event handlers (`onclick`, `onsubmit`, etc.).
+
+---
+
+## Comments
+
+Use comments to mark major sections or to explain non-obvious structure. Do not comment every element.
+
+```html
+&lt;!-- Navigation --&gt;
+&lt;nav&gt;
+  ...
+&lt;/nav&gt;
+
+&lt;!-- Main content --&gt;
+&lt;main&gt;
+  ...
+&lt;/main&gt;
+```
+
+Do not leave commented-out code in committed files.
+
+---
+
+## Void Elements
+
+Void elements have no closing tag and no trailing slash.
+
+```html
+&lt;!-- Correct --&gt;
+&lt;br&gt;
+&lt;hr&gt;
+&lt;img src=&quot;photo.jpg&quot; alt=&quot;A photo&quot;&gt;
+&lt;input type=&quot;text&quot;&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;
+
+&lt;!-- Wrong (XHTML style — not used here) --&gt;
+&lt;br /&gt;
+&lt;img src=&quot;photo.jpg&quot; alt=&quot;A photo&quot; /&gt;
+```
+
+---
+
+## Character References
+
+- Use `&amp;amp;`, `&amp;lt;`, `&amp;gt;`, `&amp;quot;`, `&amp;apos;` when those characters appear as content or attribute values.
+- Use `&amp;copy;`, `&amp;mdash;`, `&amp;ndash;`, `&amp;nbsp;` for typographic characters.
+- Do not use `&amp;nbsp;` for layout spacing. That is a CSS job.
+- Prefer UTF-8 literal characters over numeric references for everything else (accented letters, symbols).
+</pre>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <div class="summary-left">
+            <span class="summary-name">AGENTS.md</span>
+            <span class="summary-desc">Agent behavior instructions</span>
+          </div>
+          <span class="summary-chevron" aria-hidden="true">&#8250;</span>
+        </summary>
+        <div class="file-content">
+          <pre># HTML Agent Instructions
+
+Instructions for agents writing, reviewing, or editing HTML.
+
+---
+
+## General Behavior
+
+- Write HTML that a competent developer would recognize as clean and conventional on first read.
+- Default to standard HTML5. Do not reach for frameworks, libraries, or templating syntax unless the surrounding codebase already uses them.
+- Never alter existing code that is outside the scope of the task. Smallest possible change.
+- When editing an existing file, match the indentation and quoting style already in use. Do not reformat the whole file.
+- When creating a new file, follow the conventions in RULES.md exactly.
+
+---
+
+## Structure Tasks
+
+When asked to create an HTML page or component:
+
+1. Start with the standard HTML5 boilerplate (see RULES.md).
+2. Put the correct `&lt;meta charset&gt;` and `&lt;meta name=&quot;viewport&quot;&gt;` before anything else in `&lt;head&gt;`.
+3. Choose semantic elements first. Reach for `&lt;div&gt;` or `&lt;span&gt;` only when no semantic element fits.
+4. One logical section per `&lt;section&gt;` or `&lt;article&gt;`. Do not nest them arbitrarily.
+5. Every `&lt;img&gt;` must have an `alt` attribute. Write a real description, not `&quot;image&quot;` or `&quot;&quot;` unless the image is purely decorative — in that case `alt=&quot;&quot;` is correct.
+
+---
+
+## Attribute Behavior
+
+- Write attributes in this order: `id`, `class`, `type`, `name`, `value`, `href`/`src`, then everything else.
+- Use double quotes for all attribute values. No exceptions.
+- For boolean attributes (`disabled`, `checked`, `required`, `readonly`, `selected`), write the attribute name alone — no `=&quot;true&quot;` or `=&quot;&quot;`.
+- Never write inline `style=&quot;&quot;` attributes. Use a class instead.
+- Never write `onclick=&quot;&quot;`, `onchange=&quot;&quot;`, or any inline event handlers. Behavior belongs in a script file.
+
+---
+
+## Editing Tasks
+
+When asked to add, remove, or modify content inside an existing HTML file:
+
+- Preserve all existing indentation, whitespace, and comment style.
+- Do not reorganize or reorder elements that were not part of the task.
+- Do not add classes, IDs, or attributes beyond what was asked.
+- If a requested change conflicts with a rule in RULES.md, apply the rule and note the conflict in a comment directly above the changed line, then remove the comment once it is reviewed.
+
+---
+
+## What Not to Do
+
+- Do not use deprecated elements: `&lt;font&gt;`, `&lt;center&gt;`, `&lt;b&gt;` (for emphasis), `&lt;i&gt;` (for emphasis), `&lt;strike&gt;`, `&lt;marquee&gt;`, `&lt;frame&gt;`, `&lt;frameset&gt;`.
+- Do not use `&lt;br&gt;` for spacing. That is a CSS job.
+- Do not write `&lt;table&gt;` for layout. Tables are for tabular data only.
+- Do not close void elements with a trailing slash: `&lt;br /&gt;`, `&lt;img /&gt;`, `&lt;input /&gt;` are not HTML5 — write `&lt;br&gt;`, `&lt;img&gt;`, `&lt;input&gt;`.
+- Do not omit required attributes (`alt` on `&lt;img&gt;`, `lang` on `&lt;html&gt;`, `charset` in `&lt;head&gt;`).
+- Do not write `type=&quot;text/javascript&quot;` on `&lt;script&gt;` or `type=&quot;text/css&quot;` on `&lt;link&gt;`. Both are the default in HTML5.
+</pre>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="install-block">
+      <div class="install-label">Install</div>
+      <div class="install-cmd">
+        <code id="installCmd">mimicode install html</code>
+        <button class="copy-btn" id="copyBtn" type="button">copy</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>mimicode &copy; 2026</span>
+    <nav class="footer-nav">
+      <a href="/policies/privacy/">privacy</a>
+      <a href="/policies/terms/">terms</a>
+      <a href="/policies/disclaimer/">disclaimer</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hdr = document.querySelector('header');
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 0);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger   = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    burger.addEventListener('click', e => {
+      e.stopPropagation();
+      const opening = !burger.classList.contains('open');
+      opening ? (burger.classList.add('open'), navLinks.classList.add('open'), burger.setAttribute('aria-expanded', 'true'))
+              : closeMenu();
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
+
+    // ── Copy install command ──
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const cmd = document.getElementById('installCmd').textContent;
+      try {
+        await navigator.clipboard.writeText(cmd);
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'copied';
+        setTimeout(() => { btn.textContent = 'copy'; }, 1800);
+      } catch (err) {}
+    });
+  </script>
+
+</body>
+</html>
