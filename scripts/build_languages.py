@@ -32,6 +32,7 @@ except ImportError:
 REPO      = "trymimicode/language-packs"
 LANG_PATH = "languages"
 API_BASE  = f"https://api.github.com/repos/{REPO}/contents/{LANG_PATH}"
+REPO_URL  = f"https://github.com/{REPO}"
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ── GitHub API helpers ────────────────────────────────────────────────────────
@@ -150,6 +151,19 @@ BURGER_SCRIPT = """\
     document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
   </script>"""
 
+# GitHub icon SVG (16px, currentColor)
+GITHUB_ICON = """\
+<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+              0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+              -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+              .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+              -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+              .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+              .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+              0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+          </svg>"""
+
 
 # ── Page generators ───────────────────────────────────────────────────────────
 
@@ -211,7 +225,7 @@ def listing_page(lang_names):
     main {{
       flex: 1;
       width: 100%;
-      max-width: 720px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 72px 24px 120px;
     }}
@@ -347,18 +361,20 @@ def detail_page(name, files):
                 "Agent behavior instructions"      if fname == "AGENTS.md" else \
                 "Pack file"
         dropdowns += f"""\
-      <details>
-        <summary>
-          <div class="summary-left">
-            <span class="summary-name">{html.escape(fname)}</span>
-            <span class="summary-desc">{label}</span>
+        <details>
+          <summary>
+            <div class="summary-left">
+              <span class="summary-name">{html.escape(fname)}</span>
+              <span class="summary-desc">{label}</span>
+            </div>
+            <span class="summary-chevron" aria-hidden="true">&#8250;</span>
+          </summary>
+          <div class="file-content">
+            {rendered}
           </div>
-          <span class="summary-chevron" aria-hidden="true">&#8250;</span>
-        </summary>
-        <div class="file-content">
-          {rendered}
-        </div>
-      </details>\n\n"""
+        </details>\n\n"""
+
+    lang_repo_url = f"{REPO_URL}/tree/main/{LANG_PATH}/{name}"
 
     return f"""\
 <!DOCTYPE html>
@@ -403,11 +419,68 @@ def detail_page(name, files):
     main {{
       flex: 1;
       width: 100%;
-      max-width: 720px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 72px 24px 120px;
     }}
 
+    /* ── Two-column layout ── */
+    .pack-layout {{
+      display: flex;
+      gap: 56px;
+      align-items: flex-start;
+    }}
+
+    .pack-content {{
+      flex: 1;
+      min-width: 0;
+    }}
+
+    .pack-aside {{
+      width: 148px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 80px;
+    }}
+
+    @media (max-width: 680px) {{
+      .pack-layout {{ flex-direction: column; gap: 32px; }}
+      .pack-aside {{ width: 100%; position: static; }}
+    }}
+
+    /* ── Aside card ── */
+    .aside-link {{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.15s;
+    }}
+
+    .aside-link:hover {{ border-color: var(--border-hover); }}
+
+    .aside-link-top {{
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }}
+
+    .aside-link:hover .aside-link-top {{ color: var(--text); }}
+
+    .aside-link-sub {{
+      font-size: 11px;
+      color: var(--subtle);
+      letter-spacing: 0.02em;
+    }}
+
+    /* ── Page header ── */
     .eyebrow {{
       font-size: 11px;
       font-weight: 500;
@@ -686,22 +759,38 @@ def detail_page(name, files):
 {HEADER_BLOCK}
 
   <main>
-    <div class="pack-header">
-      <div class="eyebrow">Language Pack</div>
-      <h1>{html.escape(name)}</h1>
-    </div>
+    <div class="pack-layout">
 
-    <div class="file-list">
+      <div class="pack-content">
+        <div class="pack-header">
+          <div class="eyebrow">Language Pack</div>
+          <h1>{html.escape(name)}</h1>
+        </div>
+
+        <div class="file-list">
 
 {dropdowns}\
-    </div>
+        </div>
 
-    <div class="install-block">
-      <div class="install-label">Install</div>
-      <div class="install-cmd">
-        <code id="installCmd">mimicode install {html.escape(name)}</code>
-        <button class="copy-btn" id="copyBtn" type="button">copy</button>
+        <div class="install-block">
+          <div class="install-label">Install</div>
+          <div class="install-cmd">
+            <code id="installCmd">mimicode install {html.escape(name)}</code>
+            <button class="copy-btn" id="copyBtn" type="button">copy</button>
+          </div>
+        </div>
       </div>
+
+      <aside class="pack-aside">
+        <a class="aside-link" href="{lang_repo_url}" target="_blank" rel="noopener noreferrer">
+          <span class="aside-link-top">
+            {GITHUB_ICON}
+            language-packs
+          </span>
+          <span class="aside-link-sub">view on github &#8599;</span>
+        </a>
+      </aside>
+
     </div>
   </main>
 
