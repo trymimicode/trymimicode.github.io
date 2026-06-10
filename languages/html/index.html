@@ -6,7 +6,7 @@
 
   <!-- ── Primary SEO ── -->
   <title>html language pack &mdash; mimicode</title>
-  <meta name="description" content="HTML language pack for mimicode. Semantic HTML5 rules, boilerplate conventions, and agent instructions.">
+  <meta name="description" content="html language pack for mimicode. Rules and agent instructions.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="mimicode">
   <link rel="canonical" href="https://mimicode.xyz/languages/html/">
@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://mimicode.xyz/languages/html/">
   <meta property="og:site_name" content="mimicode">
   <meta property="og:title" content="html language pack &mdash; mimicode">
-  <meta property="og:description" content="HTML language pack for mimicode. Semantic HTML5 rules, boilerplate conventions, and agent instructions.">
+  <meta property="og:description" content="html language pack for mimicode. Rules and agent instructions.">
   <meta property="og:image" content="https://mimicode.xyz/assets/embed.png">
 
   <!-- ── App / Browser ── -->
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "html language pack — mimicode",
-    "description": "HTML language pack for mimicode.",
+    "description": "html language pack for mimicode.",
     "url": "https://mimicode.xyz/languages/html/",
     "isPartOf": { "@type": "WebSite", "name": "mimicode", "url": "https://mimicode.xyz" }
   }
@@ -69,17 +69,10 @@
       margin-bottom: 12px;
     }
 
-    .pack-header p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
     /* ── Dropdowns ── */
     .file-list {
       display: flex;
       flex-direction: column;
-      gap: 0;
       margin-bottom: 48px;
     }
 
@@ -132,10 +125,130 @@
     details[open] .summary-chevron { transform: rotate(90deg); }
 
     .file-content {
-      padding-bottom: 24px;
+      padding-bottom: 28px;
     }
 
-    .file-content pre {
+    /* ── Rendered markdown (scoped to .md-body) ── */
+
+    .md-body {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .md-body h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin: 0 0 12px;
+    }
+
+    .md-body h2 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .md-body h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 20px 0 8px;
+    }
+
+    .md-body p {
+      margin: 0 0 12px;
+    }
+
+    .md-body p:last-child { margin-bottom: 0; }
+
+    .md-body hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .md-body ul,
+    .md-body ol {
+      margin: 0 0 12px;
+      padding-left: 20px;
+    }
+
+    .md-body li {
+      margin-bottom: 4px;
+    }
+
+    .md-body strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .md-body em {
+      font-style: italic;
+    }
+
+    .md-body code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+
+    .md-body pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 12px 0 16px;
+      overflow-x: auto;
+    }
+
+    .md-body pre code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    .md-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 13px;
+    }
+
+    .md-body th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-hover);
+    }
+
+    .md-body td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+
+    .md-body tr:last-child td { border-bottom: none; }
+
+    /* raw file fallback */
+    .file-content > pre {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -180,6 +293,9 @@
       font-size: 14px;
       color: var(--text);
       letter-spacing: 0.01em;
+      background: none;
+      border: none;
+      padding: 0;
     }
 
     .copy-btn {
@@ -225,7 +341,6 @@
     <div class="pack-header">
       <div class="eyebrow">Language Pack</div>
       <h1>html</h1>
-      <p>Semantic HTML5 conventions, attribute rules, accessibility requirements, and agent instructions.</p>
     </div>
 
     <div class="file-list">
@@ -239,18 +354,12 @@
           <span class="summary-chevron" aria-hidden="true">&#8250;</span>
         </summary>
         <div class="file-content">
-          <pre># HTML Rules &amp; Conventions
-
-The standard this codebase writes HTML to. Conventional, readable, and semantic HTML5.
-
----
-
-## Boilerplate
-
-Every standalone HTML file starts exactly like this:
-
-```html
-&lt;!DOCTYPE html&gt;
+          <div class="md-body"><h1>HTML Rules &amp; Conventions</h1>
+<p>The standard this codebase writes HTML to. Conventional, readable, and semantic HTML5.</p>
+<hr />
+<h2>Boilerplate</h2>
+<p>Every standalone HTML file starts exactly like this:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -261,24 +370,22 @@ Every standalone HTML file starts exactly like this:
 
   &lt;/body&gt;
 &lt;/html&gt;
-```
-
-- `&lt;!DOCTYPE html&gt;` is always the very first line. Nothing before it.
-- `lang` attribute is always present on `&lt;html&gt;`. Match the primary language of the content.
-- `&lt;meta charset&gt;` is always the first element inside `&lt;head&gt;`.
-
----
-
-## Indentation &amp; Formatting
-
-- 2 spaces per indent level. No tabs.
-- Each child element is indented one level deeper than its parent.
-- Inline elements (`&lt;a&gt;`, `&lt;span&gt;`, `&lt;strong&gt;`, `&lt;em&gt;`) that contain only a short text node stay on one line.
-- Block elements always get their own line.
-- Leave one blank line between logically distinct sections at the top level of `&lt;body&gt;`. Not between every element — only between major blocks.
-
-```html
-&lt;!-- Correct --&gt;
+</code></pre>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> is always the very first line. Nothing before it.</li>
+<li><code>lang</code> attribute is always present on <code>&lt;html&gt;</code>. Match the primary language of the content.</li>
+<li><code>&lt;meta charset&gt;</code> is always the first element inside <code>&lt;head&gt;</code>.</li>
+</ul>
+<hr />
+<h2>Indentation &amp; Formatting</h2>
+<ul>
+<li>2 spaces per indent level. No tabs.</li>
+<li>Each child element is indented one level deeper than its parent.</li>
+<li>Inline elements (<code>&lt;a&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>) that contain only a short text node stay on one line.</li>
+<li>Block elements always get their own line.</li>
+<li>Leave one blank line between logically distinct sections at the top level of <code>&lt;body&gt;</code>. Not between every element — only between major blocks.</li>
+</ul>
+<pre><code class="language-html">&lt;!-- Correct --&gt;
 &lt;header&gt;
   &lt;nav&gt;
     &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
@@ -294,117 +401,131 @@ Every standalone HTML file starts exactly like this:
 &lt;footer&gt;
   &lt;p&gt;&amp;copy; 2026&lt;/p&gt;
 &lt;/footer&gt;
-```
-
----
-
-## Letter Case
-
-- All element names are lowercase: `&lt;div&gt;`, `&lt;section&gt;`, `&lt;input&gt;`.
-- All attribute names are lowercase: `class`, `href`, `data-value`.
-- Attribute values follow their natural case (URLs, IDs, class names as defined).
-
----
-
-## Attributes
-
-**Quoting:** Always double quotes. Never single quotes. Never unquoted.
-
-```html
-&lt;!-- Correct --&gt;
+</code></pre>
+<hr />
+<h2>Letter Case</h2>
+<ul>
+<li>All element names are lowercase: <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;input&gt;</code>.</li>
+<li>All attribute names are lowercase: <code>class</code>, <code>href</code>, <code>data-value</code>.</li>
+<li>Attribute values follow their natural case (URLs, IDs, class names as defined).</li>
+</ul>
+<hr />
+<h2>Attributes</h2>
+<p><strong>Quoting:</strong> Always double quotes. Never single quotes. Never unquoted.</p>
+<pre><code class="language-html">&lt;!-- Correct --&gt;
 &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
 
 &lt;!-- Wrong --&gt;
-&lt;input type=&#x27;text&#x27; name=username&gt;
-```
-
-**Ordering:** `id` → `class` → `type` → `name` → `value` → `href` or `src` → everything else.
-
-```html
-&lt;input id=&quot;email&quot; class=&quot;field&quot; type=&quot;email&quot; name=&quot;email&quot; required&gt;
+&lt;input type='text' name=username&gt;
+</code></pre>
+<p><strong>Ordering:</strong> <code>id</code> → <code>class</code> → <code>type</code> → <code>name</code> → <code>value</code> → <code>href</code> or <code>src</code> → everything else.</p>
+<pre><code class="language-html">&lt;input id=&quot;email&quot; class=&quot;field&quot; type=&quot;email&quot; name=&quot;email&quot; required&gt;
 &lt;a id=&quot;logo&quot; class=&quot;brand-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt;
 &lt;img id=&quot;hero&quot; class=&quot;hero-image&quot; src=&quot;hero.jpg&quot; alt=&quot;A mountain at sunrise&quot;&gt;
-```
-
-**Boolean attributes:** Name only. No value.
-
-```html
-&lt;!-- Correct --&gt;
+</code></pre>
+<p><strong>Boolean attributes:</strong> Name only. No value.</p>
+<pre><code class="language-html">&lt;!-- Correct --&gt;
 &lt;input type=&quot;checkbox&quot; checked&gt;
 &lt;button disabled&gt;Submit&lt;/button&gt;
 
 &lt;!-- Wrong --&gt;
 &lt;input type=&quot;checkbox&quot; checked=&quot;true&quot;&gt;
 &lt;button disabled=&quot;disabled&quot;&gt;Submit&lt;/button&gt;
-```
-
----
-
-## Semantic Elements
-
-Use the element that matches the meaning of the content:
-
-| Purpose | Element |
-|---|---|
-| Main page header / site header | `&lt;header&gt;` |
-| Primary navigation | `&lt;nav&gt;` |
-| Main content area (one per page) | `&lt;main&gt;` |
-| Self-contained content (blog post, card) | `&lt;article&gt;` |
-| Thematic grouping with a heading | `&lt;section&gt;` |
-| Tangentially related content | `&lt;aside&gt;` |
-| Page footer | `&lt;footer&gt;` |
-| Important text | `&lt;strong&gt;` |
-| Emphasized text | `&lt;em&gt;` |
-| Generic container (no meaning) | `&lt;div&gt;` |
-| Generic inline container | `&lt;span&gt;` |
-
-`&lt;div&gt;` and `&lt;span&gt;` are not wrong — they are correct when there is no semantic alternative. Do not force semantics where they do not apply.
-
----
-
-## Headings
-
-- One `&lt;h1&gt;` per page. It describes the page&#x27;s main topic.
-- Heading levels do not skip: `&lt;h1&gt;` → `&lt;h2&gt;` → `&lt;h3&gt;`. Never jump from `&lt;h1&gt;` to `&lt;h3&gt;`.
-- Do not use headings to make text large or bold. That is a CSS job.
-
----
-
-## Links
-
-- `href` always has a value. An empty `href=&quot;&quot;` is not a button — use `&lt;button&gt;`.
-- Descriptive link text. Not &quot;click here&quot;. Not &quot;read more&quot; alone.
-- External links that open in a new tab must include `rel=&quot;noopener noreferrer&quot;`.
-
-```html
-&lt;a href=&quot;https://example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Example Site&lt;/a&gt;
-```
-
----
-
-## Images
-
-- `alt` is always present.
-- Decorative images that carry no information: `alt=&quot;&quot;`.
-- All other images: a concise, accurate description of what the image shows.
-- `width` and `height` attributes should be set to the image&#x27;s natural dimensions to prevent layout shift.
-
-```html
-&lt;img src=&quot;logo.png&quot; alt=&quot;Acme Inc. logo&quot; width=&quot;200&quot; height=&quot;60&quot;&gt;
+</code></pre>
+<hr />
+<h2>Semantic Elements</h2>
+<p>Use the element that matches the meaning of the content:</p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Element</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main page header / site header</td>
+<td><code>&lt;header&gt;</code></td>
+</tr>
+<tr>
+<td>Primary navigation</td>
+<td><code>&lt;nav&gt;</code></td>
+</tr>
+<tr>
+<td>Main content area (one per page)</td>
+<td><code>&lt;main&gt;</code></td>
+</tr>
+<tr>
+<td>Self-contained content (blog post, card)</td>
+<td><code>&lt;article&gt;</code></td>
+</tr>
+<tr>
+<td>Thematic grouping with a heading</td>
+<td><code>&lt;section&gt;</code></td>
+</tr>
+<tr>
+<td>Tangentially related content</td>
+<td><code>&lt;aside&gt;</code></td>
+</tr>
+<tr>
+<td>Page footer</td>
+<td><code>&lt;footer&gt;</code></td>
+</tr>
+<tr>
+<td>Important text</td>
+<td><code>&lt;strong&gt;</code></td>
+</tr>
+<tr>
+<td>Emphasized text</td>
+<td><code>&lt;em&gt;</code></td>
+</tr>
+<tr>
+<td>Generic container (no meaning)</td>
+<td><code>&lt;div&gt;</code></td>
+</tr>
+<tr>
+<td>Generic inline container</td>
+<td><code>&lt;span&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> are not wrong — they are correct when there is no semantic alternative. Do not force semantics where they do not apply.</p>
+<hr />
+<h2>Headings</h2>
+<ul>
+<li>One <code>&lt;h1&gt;</code> per page. It describes the page's main topic.</li>
+<li>Heading levels do not skip: <code>&lt;h1&gt;</code> → <code>&lt;h2&gt;</code> → <code>&lt;h3&gt;</code>. Never jump from <code>&lt;h1&gt;</code> to <code>&lt;h3&gt;</code>.</li>
+<li>Do not use headings to make text large or bold. That is a CSS job.</li>
+</ul>
+<hr />
+<h2>Links</h2>
+<ul>
+<li><code>href</code> always has a value. An empty <code>href=""</code> is not a button — use <code>&lt;button&gt;</code>.</li>
+<li>Descriptive link text. Not "click here". Not "read more" alone.</li>
+<li>External links that open in a new tab must include <code>rel="noopener noreferrer"</code>.</li>
+</ul>
+<pre><code class="language-html">&lt;a href=&quot;https://example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Example Site&lt;/a&gt;
+</code></pre>
+<hr />
+<h2>Images</h2>
+<ul>
+<li><code>alt</code> is always present.</li>
+<li>Decorative images that carry no information: <code>alt=""</code>.</li>
+<li>All other images: a concise, accurate description of what the image shows.</li>
+<li><code>width</code> and <code>height</code> attributes should be set to the image's natural dimensions to prevent layout shift.</li>
+</ul>
+<pre><code class="language-html">&lt;img src=&quot;logo.png&quot; alt=&quot;Acme Inc. logo&quot; width=&quot;200&quot; height=&quot;60&quot;&gt;
 &lt;img src=&quot;divider.png&quot; alt=&quot;&quot; width=&quot;800&quot; height=&quot;2&quot;&gt;
-```
-
----
-
-## Forms
-
-- Every `&lt;input&gt;`, `&lt;select&gt;`, and `&lt;textarea&gt;` is associated with a `&lt;label&gt;`.
-- Prefer explicit association (`for` / `id`) over wrapping.
-- `&lt;button type=&quot;submit&quot;&gt;` for form submission. `&lt;button type=&quot;button&quot;&gt;` for everything else.
-- Group related fields inside `&lt;fieldset&gt;` with a `&lt;legend&gt;`.
-
-```html
-&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
+</code></pre>
+<hr />
+<h2>Forms</h2>
+<ul>
+<li>Every <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code> is associated with a <code>&lt;label&gt;</code>.</li>
+<li>Prefer explicit association (<code>for</code> / <code>id</code>) over wrapping.</li>
+<li><code>&lt;button type="submit"&gt;</code> for form submission. <code>&lt;button type="button"&gt;</code> for everything else.</li>
+<li>Group related fields inside <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>.</li>
+</ul>
+<pre><code class="language-html">&lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
   &lt;label for=&quot;username&quot;&gt;Username&lt;/label&gt;
   &lt;input id=&quot;username&quot; type=&quot;text&quot; name=&quot;username&quot; required&gt;
 
@@ -413,26 +534,20 @@ Use the element that matches the meaning of the content:
 
   &lt;button type=&quot;submit&quot;&gt;Log in&lt;/button&gt;
 &lt;/form&gt;
-```
-
----
-
-## Scripts &amp; Styles
-
-- `&lt;link rel=&quot;stylesheet&quot;&gt;` goes in `&lt;head&gt;`.
-- `&lt;script&gt;` goes at the end of `&lt;body&gt;`, just before `&lt;/body&gt;`, unless `defer` or `async` is used — in that case it may go in `&lt;head&gt;`.
-- No `type=&quot;text/css&quot;` on `&lt;link&gt;`. No `type=&quot;text/javascript&quot;` on `&lt;script&gt;`. Both are the default.
-- No inline `style=&quot;&quot;` attributes.
-- No inline event handlers (`onclick`, `onsubmit`, etc.).
-
----
-
-## Comments
-
-Use comments to mark major sections or to explain non-obvious structure. Do not comment every element.
-
-```html
-&lt;!-- Navigation --&gt;
+</code></pre>
+<hr />
+<h2>Scripts &amp; Styles</h2>
+<ul>
+<li><code>&lt;link rel="stylesheet"&gt;</code> goes in <code>&lt;head&gt;</code>.</li>
+<li><code>&lt;script&gt;</code> goes at the end of <code>&lt;body&gt;</code>, just before <code>&lt;/body&gt;</code>, unless <code>defer</code> or <code>async</code> is used — in that case it may go in <code>&lt;head&gt;</code>.</li>
+<li>No <code>type="text/css"</code> on <code>&lt;link&gt;</code>. No <code>type="text/javascript"</code> on <code>&lt;script&gt;</code>. Both are the default.</li>
+<li>No inline <code>style=""</code> attributes.</li>
+<li>No inline event handlers (<code>onclick</code>, <code>onsubmit</code>, etc.).</li>
+</ul>
+<hr />
+<h2>Comments</h2>
+<p>Use comments to mark major sections or to explain non-obvious structure. Do not comment every element.</p>
+<pre><code class="language-html">&lt;!-- Navigation --&gt;
 &lt;nav&gt;
   ...
 &lt;/nav&gt;
@@ -441,18 +556,12 @@ Use comments to mark major sections or to explain non-obvious structure. Do not 
 &lt;main&gt;
   ...
 &lt;/main&gt;
-```
-
-Do not leave commented-out code in committed files.
-
----
-
-## Void Elements
-
-Void elements have no closing tag and no trailing slash.
-
-```html
-&lt;!-- Correct --&gt;
+</code></pre>
+<p>Do not leave commented-out code in committed files.</p>
+<hr />
+<h2>Void Elements</h2>
+<p>Void elements have no closing tag and no trailing slash.</p>
+<pre><code class="language-html">&lt;!-- Correct --&gt;
 &lt;br&gt;
 &lt;hr&gt;
 &lt;img src=&quot;photo.jpg&quot; alt=&quot;A photo&quot;&gt;
@@ -463,17 +572,15 @@ Void elements have no closing tag and no trailing slash.
 &lt;!-- Wrong (XHTML style — not used here) --&gt;
 &lt;br /&gt;
 &lt;img src=&quot;photo.jpg&quot; alt=&quot;A photo&quot; /&gt;
-```
-
----
-
-## Character References
-
-- Use `&amp;amp;`, `&amp;lt;`, `&amp;gt;`, `&amp;quot;`, `&amp;apos;` when those characters appear as content or attribute values.
-- Use `&amp;copy;`, `&amp;mdash;`, `&amp;ndash;`, `&amp;nbsp;` for typographic characters.
-- Do not use `&amp;nbsp;` for layout spacing. That is a CSS job.
-- Prefer UTF-8 literal characters over numeric references for everything else (accented letters, symbols).
-</pre>
+</code></pre>
+<hr />
+<h2>Character References</h2>
+<ul>
+<li>Use <code>&amp;amp;</code>, <code>&amp;lt;</code>, <code>&amp;gt;</code>, <code>&amp;quot;</code>, <code>&amp;apos;</code> when those characters appear as content or attribute values.</li>
+<li>Use <code>&amp;copy;</code>, <code>&amp;mdash;</code>, <code>&amp;ndash;</code>, <code>&amp;nbsp;</code> for typographic characters.</li>
+<li>Do not use <code>&amp;nbsp;</code> for layout spacing. That is a CSS job.</li>
+<li>Prefer UTF-8 literal characters over numeric references for everything else (accented letters, symbols).</li>
+</ul></div>
         </div>
       </details>
 
@@ -486,64 +593,55 @@ Void elements have no closing tag and no trailing slash.
           <span class="summary-chevron" aria-hidden="true">&#8250;</span>
         </summary>
         <div class="file-content">
-          <pre># HTML Agent Instructions
-
-Instructions for agents writing, reviewing, or editing HTML.
-
----
-
-## General Behavior
-
-- Write HTML that a competent developer would recognize as clean and conventional on first read.
-- Default to standard HTML5. Do not reach for frameworks, libraries, or templating syntax unless the surrounding codebase already uses them.
-- Never alter existing code that is outside the scope of the task. Smallest possible change.
-- When editing an existing file, match the indentation and quoting style already in use. Do not reformat the whole file.
-- When creating a new file, follow the conventions in RULES.md exactly.
-
----
-
-## Structure Tasks
-
-When asked to create an HTML page or component:
-
-1. Start with the standard HTML5 boilerplate (see RULES.md).
-2. Put the correct `&lt;meta charset&gt;` and `&lt;meta name=&quot;viewport&quot;&gt;` before anything else in `&lt;head&gt;`.
-3. Choose semantic elements first. Reach for `&lt;div&gt;` or `&lt;span&gt;` only when no semantic element fits.
-4. One logical section per `&lt;section&gt;` or `&lt;article&gt;`. Do not nest them arbitrarily.
-5. Every `&lt;img&gt;` must have an `alt` attribute. Write a real description, not `&quot;image&quot;` or `&quot;&quot;` unless the image is purely decorative — in that case `alt=&quot;&quot;` is correct.
-
----
-
-## Attribute Behavior
-
-- Write attributes in this order: `id`, `class`, `type`, `name`, `value`, `href`/`src`, then everything else.
-- Use double quotes for all attribute values. No exceptions.
-- For boolean attributes (`disabled`, `checked`, `required`, `readonly`, `selected`), write the attribute name alone — no `=&quot;true&quot;` or `=&quot;&quot;`.
-- Never write inline `style=&quot;&quot;` attributes. Use a class instead.
-- Never write `onclick=&quot;&quot;`, `onchange=&quot;&quot;`, or any inline event handlers. Behavior belongs in a script file.
-
----
-
-## Editing Tasks
-
-When asked to add, remove, or modify content inside an existing HTML file:
-
-- Preserve all existing indentation, whitespace, and comment style.
-- Do not reorganize or reorder elements that were not part of the task.
-- Do not add classes, IDs, or attributes beyond what was asked.
-- If a requested change conflicts with a rule in RULES.md, apply the rule and note the conflict in a comment directly above the changed line, then remove the comment once it is reviewed.
-
----
-
-## What Not to Do
-
-- Do not use deprecated elements: `&lt;font&gt;`, `&lt;center&gt;`, `&lt;b&gt;` (for emphasis), `&lt;i&gt;` (for emphasis), `&lt;strike&gt;`, `&lt;marquee&gt;`, `&lt;frame&gt;`, `&lt;frameset&gt;`.
-- Do not use `&lt;br&gt;` for spacing. That is a CSS job.
-- Do not write `&lt;table&gt;` for layout. Tables are for tabular data only.
-- Do not close void elements with a trailing slash: `&lt;br /&gt;`, `&lt;img /&gt;`, `&lt;input /&gt;` are not HTML5 — write `&lt;br&gt;`, `&lt;img&gt;`, `&lt;input&gt;`.
-- Do not omit required attributes (`alt` on `&lt;img&gt;`, `lang` on `&lt;html&gt;`, `charset` in `&lt;head&gt;`).
-- Do not write `type=&quot;text/javascript&quot;` on `&lt;script&gt;` or `type=&quot;text/css&quot;` on `&lt;link&gt;`. Both are the default in HTML5.
-</pre>
+          <div class="md-body"><h1>HTML Agent Instructions</h1>
+<p>Instructions for agents writing, reviewing, or editing HTML.</p>
+<hr />
+<h2>General Behavior</h2>
+<ul>
+<li>Write HTML that a competent developer would recognize as clean and conventional on first read.</li>
+<li>Default to standard HTML5. Do not reach for frameworks, libraries, or templating syntax unless the surrounding codebase already uses them.</li>
+<li>Never alter existing code that is outside the scope of the task. Smallest possible change.</li>
+<li>When editing an existing file, match the indentation and quoting style already in use. Do not reformat the whole file.</li>
+<li>When creating a new file, follow the conventions in RULES.md exactly.</li>
+</ul>
+<hr />
+<h2>Structure Tasks</h2>
+<p>When asked to create an HTML page or component:</p>
+<ol>
+<li>Start with the standard HTML5 boilerplate (see RULES.md).</li>
+<li>Put the correct <code>&lt;meta charset&gt;</code> and <code>&lt;meta name="viewport"&gt;</code> before anything else in <code>&lt;head&gt;</code>.</li>
+<li>Choose semantic elements first. Reach for <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> only when no semantic element fits.</li>
+<li>One logical section per <code>&lt;section&gt;</code> or <code>&lt;article&gt;</code>. Do not nest them arbitrarily.</li>
+<li>Every <code>&lt;img&gt;</code> must have an <code>alt</code> attribute. Write a real description, not <code>"image"</code> or <code>""</code> unless the image is purely decorative — in that case <code>alt=""</code> is correct.</li>
+</ol>
+<hr />
+<h2>Attribute Behavior</h2>
+<ul>
+<li>Write attributes in this order: <code>id</code>, <code>class</code>, <code>type</code>, <code>name</code>, <code>value</code>, <code>href</code>/<code>src</code>, then everything else.</li>
+<li>Use double quotes for all attribute values. No exceptions.</li>
+<li>For boolean attributes (<code>disabled</code>, <code>checked</code>, <code>required</code>, <code>readonly</code>, <code>selected</code>), write the attribute name alone — no <code>="true"</code> or <code>=""</code>.</li>
+<li>Never write inline <code>style=""</code> attributes. Use a class instead.</li>
+<li>Never write <code>onclick=""</code>, <code>onchange=""</code>, or any inline event handlers. Behavior belongs in a script file.</li>
+</ul>
+<hr />
+<h2>Editing Tasks</h2>
+<p>When asked to add, remove, or modify content inside an existing HTML file:</p>
+<ul>
+<li>Preserve all existing indentation, whitespace, and comment style.</li>
+<li>Do not reorganize or reorder elements that were not part of the task.</li>
+<li>Do not add classes, IDs, or attributes beyond what was asked.</li>
+<li>If a requested change conflicts with a rule in RULES.md, apply the rule and note the conflict in a comment directly above the changed line, then remove the comment once it is reviewed.</li>
+</ul>
+<hr />
+<h2>What Not to Do</h2>
+<ul>
+<li>Do not use deprecated elements: <code>&lt;font&gt;</code>, <code>&lt;center&gt;</code>, <code>&lt;b&gt;</code> (for emphasis), <code>&lt;i&gt;</code> (for emphasis), <code>&lt;strike&gt;</code>, <code>&lt;marquee&gt;</code>, <code>&lt;frame&gt;</code>, <code>&lt;frameset&gt;</code>.</li>
+<li>Do not use <code>&lt;br&gt;</code> for spacing. That is a CSS job.</li>
+<li>Do not write <code>&lt;table&gt;</code> for layout. Tables are for tabular data only.</li>
+<li>Do not close void elements with a trailing slash: <code>&lt;br /&gt;</code>, <code>&lt;img /&gt;</code>, <code>&lt;input /&gt;</code> are not HTML5 — write <code>&lt;br&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>.</li>
+<li>Do not omit required attributes (<code>alt</code> on <code>&lt;img&gt;</code>, <code>lang</code> on <code>&lt;html&gt;</code>, <code>charset</code> in <code>&lt;head&gt;</code>).</li>
+<li>Do not write <code>type="text/javascript"</code> on <code>&lt;script&gt;</code> or <code>type="text/css"</code> on <code>&lt;link&gt;</code>. Both are the default in HTML5.</li>
+</ul></div>
         </div>
       </details>
 
@@ -592,7 +690,6 @@ When asked to add, remove, or modify content inside an existing HTML file:
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     document.addEventListener('click', e => { if (!e.target.closest('nav')) closeMenu(); });
 
-    // ── Copy install command ──
     document.getElementById('copyBtn').addEventListener('click', async () => {
       const cmd = document.getElementById('installCmd').textContent;
       try {
