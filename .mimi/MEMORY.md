@@ -19,3 +19,8 @@ Model implemented a multi-file navigation animation system (exit transitions in 
 ## session-reflect: e445e2731950 — 2026-06-04T20:06:21Z
 User requested review of the landing page's policies links. Model explored the policies directory structure, made several failed command attempts (find, rg, Windows dir syntax) before successfully discovering the structure: three policy pages (privacy, terms, disclaimer) in separate directories under policies/.
 
+## Website — languages page + nav — 2026-06-10T18:46:09Z
+**Summary:** Created languages/index.html (blank page, same pattern as policy pages). Added langs nav link before github in all 5 pages: index.html, docs/index.html, policies/privacy/index.html, policies/terms/index.html, policies/disclaimer/index.html. All HTML files use CRLF line endings — edit tool fails on these; use Python open(f,'rb').read().replace() instead.
+**Files:** languages/index.html, index.html, docs/index.html, policies/privacy/index.html, policies/terms/index.html, policies/disclaimer/index.html
+**Tags:** nav, languages, crlf, windows, python-edit
+
