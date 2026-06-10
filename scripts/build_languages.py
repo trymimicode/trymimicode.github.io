@@ -225,7 +225,7 @@ def listing_page(lang_names):
     main {{
       flex: 1;
       width: 100%;
-      max-width: 920px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 72px 24px 120px;
     }}
@@ -419,7 +419,7 @@ def detail_page(name, files):
     main {{
       flex: 1;
       width: 100%;
-      max-width: 920px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 72px 24px 120px;
     }}

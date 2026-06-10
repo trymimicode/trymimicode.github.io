@@ -15,7 +15,7 @@
   --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
 /* ── Body ── */
 body {
