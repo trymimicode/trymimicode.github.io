@@ -292,18 +292,65 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      main { grid-template-columns: 1fr; gap: 40px; }
-      aside { position: static; max-height: none; margin-bottom: -40px; }
+      main {
+        grid-template-columns: 1fr;
+        padding: 40px 20px 80px;
+        gap: 0;
+      }
+
+      aside {
+        position: static;
+        max-height: none;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px 20px 4px;
+        margin-bottom: 48px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+      }
+
+      aside::before {
+        grid-column: 1 / -1;
+        content: "On this page";
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--subtle);
+        padding-bottom: 14px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-section {
+        min-width: 0;
+        margin-bottom: 20px;
+      }
+
+      .sidebar-nav a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .content h1 { font-size: 36px; }
       .content h2 { font-size: 24px; }
     }
 
     @media (max-width: 640px) {
-      main { padding: 40px 16px; gap: 24px; }
-      .sidebar-section { margin-bottom: 24px; }
+      main { padding: 24px 16px 64px; }
+
+      aside { grid-template-columns: 1fr; }
+
       .content h1 { font-size: 28px; }
       .content h2 { font-size: 20px; }
       .content h3 { font-size: 16px; }
+
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     }
   </style>
 </head>
